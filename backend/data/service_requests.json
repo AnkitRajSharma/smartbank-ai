@@ -1,0 +1,332 @@
+[
+  {
+    "report_id": "fe984912-2770-4a92-ac8b-d3755288efca",
+    "user_id": "SB10001",
+    "period": "2026-11",
+    "generated_at": "2026-11-05T16:13:43+00:00",
+    "account": "XXXX XXXX 1001",
+    "analytics": {
+      "total_income": 310634.0,
+      "total_expenditure": 108173.39,
+      "net_savings": 202460.61,
+      "average_transaction_amount": 9971.6,
+      "highest_transaction": 75000.0,
+      "lowest_transaction": 780.0,
+      "category_expenses": [
+        {
+          "category": "Cash",
+          "amount": 21000.0
+        },
+        {
+          "category": "Dining",
+          "amount": 5218.75
+        },
+        {
+          "category": "Groceries",
+          "amount": 8922.5
+        },
+        {
+          "category": "Loan",
+          "amount": 38417.5
+        },
+        {
+          "category": "Medical",
+          "amount": 2437.5
+        },
+        {
+          "category": "Shopping",
+          "amount": 13900.25
+        },
+        {
+          "category": "Transport",
+          "amount": 7360.0
+        },
+        {
+          "category": "Utilities",
+          "amount": 10916.89
+        }
+      ],
+      "monthly_trends": [
+        {
+          "month": "2026-09",
+          "income": 75000.0,
+          "expenses": 14422.5
+        },
+        {
+          "month": "2026-10",
+          "income": 235634.0,
+          "expenses": 79615.14
+        },
+        {
+          "month": "2026-11",
+          "income": 0.0,
+          "expenses": 14135.75
+        }
+      ]
+    }
+  },
+  {
+    "report_id": "19366778-66dd-43a2-babe-5725262ca729",
+    "user_id": "SB10002",
+    "period": "2026-11",
+    "generated_at": "2026-11-05T16:13:44+00:00",
+    "account": "XXXX XXXX 1002",
+    "analytics": {
+      "total_income": 211752.7,
+      "total_expenditure": 119465.68,
+      "net_savings": 92287.02,
+      "average_transaction_amount": 7886.15,
+      "highest_transaction": 50000.0,
+      "lowest_transaction": 865.8,
+      "category_expenses": [
+        {
+          "category": "Cash",
+          "amount": 23200.0
+        },
+        {
+          "category": "Dining",
+          "amount": 5768.75
+        },
+        {
+          "category": "Groceries",
+          "amount": 9868.5
+        },
+        {
+          "category": "Loan",
+          "amount": 42410.5
+        },
+        {
+          "category": "Medical",
+          "amount": 2694.9
+        },
+        {
+          "category": "Shopping",
+          "amount": 15347.85
+        },
+        {
+          "category": "Transport",
+          "amount": 8119.0
+        },
+        {
+          "category": "Utilities",
+          "amount": 12056.18
+        }
+      ],
+      "monthly_trends": [
+        {
+          "month": "2026-09",
+          "income": 50000.0,
+          "expenses": 15910.8
+        },
+        {
+          "month": "2026-10",
+          "income": 161752.7,
+          "expenses": 87930.83
+        },
+        {
+          "month": "2026-11",
+          "income": 0.0,
+          "expenses": 15624.05
+        }
+      ]
+    }
+  },
+  {
+    "report_id": "7070cf0e-f7fe-4462-9193-cf460a442ee2",
+    "user_id": "SB10003",
+    "period": "2026-11",
+    "generated_at": "2026-11-05T16:13:44+00:00",
+    "account": "XXXX XXXX 1003",
+    "analytics": {
+      "total_income": 152871.4,
+      "total_expenditure": 130757.93,
+      "net_savings": 22113.47,
+      "average_transaction_amount": 6753.08,
+      "highest_transaction": 35000.0,
+      "lowest_transaction": 951.6,
+      "category_expenses": [
+        {
+          "category": "Cash",
+          "amount": 25400.0
+        },
+        {
+          "category": "Dining",
+          "amount": 6318.75
+        },
+        {
+          "category": "Groceries",
+          "amount": 10814.5
+        },
+        {
+          "category": "Loan",
+          "amount": 46403.5
+        },
+        {
+          "category": "Medical",
+          "amount": 2952.3
+        },
+        {
+          "category": "Shopping",
+          "amount": 16795.45
+        },
+        {
+          "category": "Transport",
+          "amount": 8878.0
+        },
+        {
+          "category": "Utilities",
+          "amount": 13195.43
+        }
+      ],
+      "monthly_trends": [
+        {
+          "month": "2026-09",
+          "income": 35000.0,
+          "expenses": 17399.1
+        },
+        {
+          "month": "2026-10",
+          "income": 117871.4,
+          "expenses": 96246.48
+        },
+        {
+          "month": "2026-11",
+          "income": 0.0,
+          "expenses": 17112.35
+        }
+      ]
+    }
+  },
+  {
+    "report_id": "cde8ca39-6e09-4cca-9a54-4fad4d9d343e",
+    "user_id": "SB10001",
+    "period": "2026-11",
+    "generated_at": "2026-11-06T19:47:33+00:00",
+    "account": "XXXX XXXX 1001",
+    "analytics": {
+      "total_income": 310634.0,
+      "total_expenditure": 108173.39,
+      "net_savings": 202460.61,
+      "average_transaction_amount": 9971.6,
+      "highest_transaction": 75000.0,
+      "lowest_transaction": 780.0,
+      "category_expenses": [
+        {
+          "category": "Cash",
+          "amount": 21000.0
+        },
+        {
+          "category": "Dining",
+          "amount": 5218.75
+        },
+        {
+          "category": "Groceries",
+          "amount": 8922.5
+        },
+        {
+          "category": "Loan",
+          "amount": 38417.5
+        },
+        {
+          "category": "Medical",
+          "amount": 2437.5
+        },
+        {
+          "category": "Shopping",
+          "amount": 13900.25
+        },
+        {
+          "category": "Transport",
+          "amount": 7360.0
+        },
+        {
+          "category": "Utilities",
+          "amount": 10916.89
+        }
+      ],
+      "monthly_trends": [
+        {
+          "month": "2026-09",
+          "income": 75000.0,
+          "expenses": 14422.5
+        },
+        {
+          "month": "2026-10",
+          "income": 235634.0,
+          "expenses": 79615.14
+        },
+        {
+          "month": "2026-11",
+          "income": 0.0,
+          "expenses": 14135.75
+        }
+      ]
+    }
+  },
+  {
+    "report_id": "ae1b56d2-1764-4f62-83be-e15fd8410a12",
+    "user_id": "SB10001",
+    "period": "2026-11",
+    "generated_at": "2026-11-06T19:48:52+00:00",
+    "account": "XXXX XXXX 1001",
+    "analytics": {
+      "total_income": 310634.0,
+      "total_expenditure": 108173.39,
+      "net_savings": 202460.61,
+      "average_transaction_amount": 9971.6,
+      "highest_transaction": 75000.0,
+      "lowest_transaction": 780.0,
+      "category_expenses": [
+        {
+          "category": "Cash",
+          "amount": 21000.0
+        },
+        {
+          "category": "Dining",
+          "amount": 5218.75
+        },
+        {
+          "category": "Groceries",
+          "amount": 8922.5
+        },
+        {
+          "category": "Loan",
+          "amount": 38417.5
+        },
+        {
+          "category": "Medical",
+          "amount": 2437.5
+        },
+        {
+          "category": "Shopping",
+          "amount": 13900.25
+        },
+        {
+          "category": "Transport",
+          "amount": 7360.0
+        },
+        {
+          "category": "Utilities",
+          "amount": 10916.89
+        }
+      ],
+      "monthly_trends": [
+        {
+          "month": "2026-09",
+          "income": 75000.0,
+          "expenses": 14422.5
+        },
+        {
+          "month": "2026-10",
+          "income": 235634.0,
+          "expenses": 79615.14
+        },
+        {
+          "month": "2026-11",
+          "income": 0.0,
+          "expenses": 14135.75
+        }
+      ]
+    }
+  }
+]

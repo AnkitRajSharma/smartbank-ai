@@ -1,0 +1,499 @@
+[
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-05T16:13:43+00:00",
+    "user_message": "What is my account balance?",
+    "assistant_message": "Your available synthetic demo balance is ₹148,250 (account XXXX XXXX 1001)."
+  },
+  {
+    "user_id": "SB10002",
+    "session_id": "default",
+    "timestamp": "2026-11-05T16:13:44+00:00",
+    "user_message": "What is my account balance?",
+    "assistant_message": "Your available synthetic demo balance is ₹92,750 (account XXXX XXXX 1002)."
+  },
+  {
+    "user_id": "SB10003",
+    "session_id": "default",
+    "timestamp": "2026-11-05T16:13:44+00:00",
+    "user_message": "What is my account balance?",
+    "assistant_message": "Your available synthetic demo balance is ₹54,800 (account XXXX XXXX 1003)."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-05T16:15:05+00:00",
+    "user_message": "What is my credit score?",
+    "assistant_message": "Your illustrative synthetic demo score is 785 (Excellent). Utilization is 18% and the demo debt-to-income ratio is 0.0%. This is not a credit bureau score or lending decision."
+  },
+  {
+    "user_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "session_id": "f8f99158-7be4-4673-897a-7a8d6cd958b6",
+    "timestamp": "2026-11-05T16:25:42+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "session_id": "34c3a2e4-c114-4938-8a36-14b6f35b45f5",
+    "timestamp": "2026-11-05T16:25:44+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "session_id": "e32e9c10-666d-4ce2-9775-b4f58ce5a809",
+    "timestamp": "2026-11-05T16:25:45+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "session_id": "caf47c96-1ffd-41c8-8438-27a4e55446ea",
+    "timestamp": "2026-11-05T16:25:46+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "0cbf8446-3ab8-4e79-9cf4-29574d97bcff",
+    "timestamp": "2026-11-05T16:29:11+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "d15ecafd-783e-45a7-971b-29a609ca6217",
+    "timestamp": "2026-11-05T16:29:12+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "a06f8e9a-7b7c-444f-8a56-fcbbb308aa00",
+    "timestamp": "2026-11-05T16:32:59+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "03c9629f-f88d-44c1-b4ae-e66825bb0b39",
+    "timestamp": "2026-11-05T16:33:01+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "99ea494e-5195-45c8-a147-1aa00ddeb82d",
+    "timestamp": "2026-11-05T16:33:03+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "498a8da9-5f6e-4fb6-8c6d-e629c0dea838",
+    "timestamp": "2026-11-05T16:33:11+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "debug",
+    "timestamp": "2026-11-05T16:34:14+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "chat-verification",
+    "timestamp": "2026-11-05T16:39:00+00:00",
+    "user_message": "Explain why customers should never share an OTP, in two short sentences.",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "verify-chat-local",
+    "timestamp": "2026-11-05T16:50:09+00:00",
+    "user_message": "Can I get a loan?",
+    "assistant_message": "I can make an experimental estimate. Please provide these details in one message, using the labels shown: age; annual income; employment type (Salaried, Self-employed, or Contract); years of employment experience; credit score; existing loan amount; monthly debt or EMI total; requested loan amount. You can also open the matching form below. I won’t assume values you haven’t provided."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "64521a2e-409f-4abf-878c-b945edfa0ea3",
+    "timestamp": "2026-11-05T16:51:35+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "3cba090c-25d6-4f53-bb2f-bca42653b862",
+    "timestamp": "2026-11-05T16:51:54+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "fc36e20c-b93e-413a-a50d-eda10368ad06",
+    "timestamp": "2026-11-05T16:52:46+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "35651e0a-d441-41a3-86ce-31825a1067f2",
+    "timestamp": "2026-11-05T16:54:15+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "ui-verification",
+    "timestamp": "2026-11-05T16:56:37+00:00",
+    "user_message": "What is my account balance?",
+    "assistant_message": "Your available synthetic demo balance is ₹148,250 (account XXXX XXXX 1001)."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "ac8bf1ef-828e-4778-91fa-200e2cc0347c",
+    "timestamp": "2026-11-05T16:59:17+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "ac8bf1ef-828e-4778-91fa-200e2cc0347c",
+    "timestamp": "2026-11-05T16:59:21+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "ac8bf1ef-828e-4778-91fa-200e2cc0347c",
+    "timestamp": "2026-11-05T16:59:24+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "ac8bf1ef-828e-4778-91fa-200e2cc0347c",
+    "timestamp": "2026-11-05T16:59:39+00:00",
+    "user_message": "how can I contact helpline",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "ac8bf1ef-828e-4778-91fa-200e2cc0347c",
+    "timestamp": "2026-11-05T17:01:30+00:00",
+    "user_message": "emi",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "e6d7c711-1fd8-4b12-87ad-f9956fe4e1e0",
+    "timestamp": "2026-11-05T17:04:09+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "e6d7c711-1fd8-4b12-87ad-f9956fe4e1e0",
+    "timestamp": "2026-11-05T17:04:34+00:00",
+    "user_message": "what are new pf schemens",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "1c55111f-f5c4-472c-813a-cce1f4c633d0",
+    "timestamp": "2026-11-05T17:05:05+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "1c55111f-f5c4-472c-813a-cce1f4c633d0",
+    "timestamp": "2026-11-05T17:05:23+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "1c55111f-f5c4-472c-813a-cce1f4c633d0",
+    "timestamp": "2026-11-05T17:05:59+00:00",
+    "user_message": "how can I apply for credit card",
+    "assistant_message": "A credit card lets you borrow up to a limit for purchases and repay the balance. Fees and interest terms vary."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "1c55111f-f5c4-472c-813a-cce1f4c633d0",
+    "timestamp": "2026-11-05T17:06:37+00:00",
+    "user_message": "what is my monthly overall transaction",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "74851c47-a479-4310-8789-cd2b479e8951",
+    "timestamp": "2026-11-05T17:07:38+00:00",
+    "user_message": "types of loan",
+    "assistant_message": "A loan lets you borrow money and repay it over time, usually with interest. Review rates, fees, repayment schedule, and terms with your lender."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "74851c47-a479-4310-8789-cd2b479e8951",
+    "timestamp": "2026-11-05T17:07:57+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "b998053f-6cfa-40ce-a647-783ca638b55c",
+    "timestamp": "2026-11-05T17:19:58+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "b998053f-6cfa-40ce-a647-783ca638b55c",
+    "timestamp": "2026-11-05T17:20:00+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "b998053f-6cfa-40ce-a647-783ca638b55c",
+    "timestamp": "2026-11-05T17:20:01+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "b998053f-6cfa-40ce-a647-783ca638b55c",
+    "timestamp": "2026-11-05T17:20:03+00:00",
+    "user_message": "loan",
+    "assistant_message": "A loan lets you borrow money and repay it over time, usually with interest. Review rates, fees, repayment schedule, and terms with your lender."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "b998053f-6cfa-40ce-a647-783ca638b55c",
+    "timestamp": "2026-11-05T17:20:05+00:00",
+    "user_message": "type",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:47+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:48+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:49+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:51+00:00",
+    "user_message": "type",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:53+00:00",
+    "user_message": "cdcd",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:54+00:00",
+    "user_message": "das",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:55+00:00",
+    "user_message": "sa",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:55+00:00",
+    "user_message": "dsa",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:55+00:00",
+    "user_message": "d",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "2e32d6f0-a790-4f80-98ad-bc293353a036",
+    "timestamp": "2026-11-05T17:20:55+00:00",
+    "user_message": "as",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:22:45+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:22:49+00:00",
+    "user_message": "type of loan",
+    "assistant_message": "A loan lets you borrow money and repay it over time, usually with interest. Review rates, fees, repayment schedule, and terms with your lender."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:22:54+00:00",
+    "user_message": "fraud",
+    "assistant_message": "I can make an experimental estimate. Please provide these details in one message, using the labels shown: transaction amount; transaction hour (0–23); transaction type (Purchase, Cash Withdrawal, Transfer, Online Payment); merchant category (Retail, Groceries, Travel, Dining, Electronics, Other); number of transactions in the last 24 hours; distance from your usual location in km; whether it was international (yes or no); channel (In Person, Online, Mobile, ATM). You can also open the matching form below. I won’t assume values you haven’t provided."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:23:18+00:00",
+    "user_message": "provide me my last transaction detail",
+    "assistant_message": "I can make an experimental estimate. Please provide these details in one message, using the labels shown: transaction amount; transaction hour (0–23); transaction type (Purchase, Cash Withdrawal, Transfer, Online Payment); merchant category (Retail, Groceries, Travel, Dining, Electronics, Other); number of transactions in the last 24 hours; distance from your usual location in km; whether it was international (yes or no); channel (In Person, Online, Mobile, ATM). You can also open the matching form below. I won’t assume values you haven’t provided."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:23:30+00:00",
+    "user_message": "my cards",
+    "assistant_message": "I can make an experimental estimate. Please provide these details in one message, using the labels shown: transaction amount; transaction hour (0–23); transaction type (Purchase, Cash Withdrawal, Transfer, Online Payment); merchant category (Retail, Groceries, Travel, Dining, Electronics, Other); number of transactions in the last 24 hours; distance from your usual location in km; whether it was international (yes or no); channel (In Person, Online, Mobile, ATM). You can also open the matching form below. I won’t assume values you haven’t provided."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:23:32+00:00",
+    "user_message": "How can I block my debit card?",
+    "assistant_message": "I can make an experimental estimate. Please provide these details in one message, using the labels shown: transaction amount; transaction hour (0–23); transaction type (Purchase, Cash Withdrawal, Transfer, Online Payment); merchant category (Retail, Groceries, Travel, Dining, Electronics, Other); number of transactions in the last 24 hours; distance from your usual location in km; whether it was international (yes or no); channel (In Person, Online, Mobile, ATM). You can also open the matching form below. I won’t assume values you haven’t provided."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:23:34+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "I can make an experimental estimate. Please provide these details in one message, using the labels shown: transaction amount; transaction hour (0–23); transaction type (Purchase, Cash Withdrawal, Transfer, Online Payment); merchant category (Retail, Groceries, Travel, Dining, Electronics, Other); number of transactions in the last 24 hours; distance from your usual location in km; whether it was international (yes or no); channel (In Person, Online, Mobile, ATM). You can also open the matching form below. I won’t assume values you haven’t provided."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "43935d27-0f6d-44f1-a8e3-d16c11ff5848",
+    "timestamp": "2026-11-05T17:23:34+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "I can make an experimental estimate. Please provide these details in one message, using the labels shown: transaction amount; transaction hour (0–23); transaction type (Purchase, Cash Withdrawal, Transfer, Online Payment); merchant category (Retail, Groceries, Travel, Dining, Electronics, Other); number of transactions in the last 24 hours; distance from your usual location in km; whether it was international (yes or no); channel (In Person, Online, Mobile, ATM). You can also open the matching form below. I won’t assume values you haven’t provided."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:43:19+00:00",
+    "user_message": "What is a credit score?",
+    "assistant_message": "A credit score summarizes credit history and repayment behavior. Lenders may use it when reviewing a loan or card application."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:43:19+00:00",
+    "user_message": "What is my balance?",
+    "assistant_message": "Your available synthetic demo balance is ₹148,250 (account XXXX XXXX 1001)."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:47:54+00:00",
+    "user_message": "How do I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:47:54+00:00",
+    "user_message": "What is my balance?",
+    "assistant_message": "Your available synthetic demo balance is ₹148,250 (account XXXX XXXX 1001)."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:47:55+00:00",
+    "user_message": "What is my spending summary?",
+    "assistant_message": "Across the synthetic transaction history, income is ₹310,634, expenditure is ₹108,173, and net savings are ₹202,461."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:47:55+00:00",
+    "user_message": "What is my credit score?",
+    "assistant_message": "Your illustrative synthetic demo score is 785 (Excellent). Utilization is 18% and the demo debt-to-income ratio is 0.0%. This is not a credit bureau score or lending decision."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:49:20+00:00",
+    "user_message": "How do I block my debit card?",
+    "assistant_message": "If your debit card is lost or stolen, block it in your bank’s official app or call the number on the official bank website. Never share your PIN or OTP."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:49:20+00:00",
+    "user_message": "What is my balance?",
+    "assistant_message": "Your available synthetic demo balance is ₹148,250 (account XXXX XXXX 1001)."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:49:20+00:00",
+    "user_message": "What is my spending summary?",
+    "assistant_message": "Across the synthetic transaction history, income is ₹310,634, expenditure is ₹108,173, and net savings are ₹202,461."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-06T19:49:20+00:00",
+    "user_message": "What is my credit score?",
+    "assistant_message": "Your illustrative synthetic demo score is 785 (Excellent). Utilization is 18% and the demo debt-to-income ratio is 0.0%. This is not a credit bureau score or lending decision."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "bfb45d96-27f4-4f68-b4c5-2158bf901d3d",
+    "timestamp": "2026-11-06T19:54:14+00:00",
+    "user_message": "what is my last 5 transaction",
+    "assistant_message": "I can help with savings or current accounts, loans, credit scores, cards, fixed deposits, balance guidance, loan eligibility estimates, or transaction risk checks."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "bfb45d96-27f4-4f68-b4c5-2158bf901d3d",
+    "timestamp": "2026-11-06T19:56:17+00:00",
+    "user_message": "am i elegible for loan",
+    "assistant_message": "A loan lets you borrow money and repay it over time, usually with interest. Review rates, fees, repayment schedule, and terms with your lender."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "bfb45d96-27f4-4f68-b4c5-2158bf901d3d",
+    "timestamp": "2026-11-06T19:56:48+00:00",
+    "user_message": "How can I apply for a loan?",
+    "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  }
+]

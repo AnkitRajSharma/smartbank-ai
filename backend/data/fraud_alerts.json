@@ -1,0 +1,10 @@
+[
+  {
+    "alert_id": "FA-SB10003-001",
+    "account_id": "ACC-SB10003",
+    "transaction_id": "TX-SB10003-030",
+    "date": "2026-10-24",
+    "risk_level": "Medium",
+    "explanation": "Synthetic unusual activity example; verify activity through official channels."
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "user_id": "SB10001",
+    "customer_id": "SB10001",
+    "name": "Aarav Sharma",
+    "email": "customer1@smartbank.demo",
+    "account_id": "ACC-SB10001",
+    "masked_account_number": "XXXX XXXX 1001",
+    "ifsc": "SMBK0000420",
+    "account_type": "Savings",
+    "available_balance": 148250,
+    "opening_balance": -54210.61,
+    "opening_date": "2023-04-15",
+    "annual_income": 900000,
+    "employment_type": "Salaried",
+    "employment_experience": 5,
+    "monthly_income": 75000,
+    "monthly_expenses": 43500,
+    "existing_loans": [],
+    "monthly_emi": 0,
+    "loan_history": [],
+    "synthetic_data": true
+  },
+  {
+    "user_id": "SB10002",
+    "customer_id": "SB10002",
+    "name": "Priya Verma",
+    "email": "customer2@smartbank.demo",
+    "account_id": "ACC-SB10002",
+    "masked_account_number": "XXXX XXXX 1002",
+    "ifsc": "SMBK0000420",
+    "account_type": "Savings",
+    "available_balance": 92750,
+    "opening_balance": 462.98,
+    "opening_date": "2022-09-10",
+    "annual_income": 600000,
+    "employment_type": "Self-employed",
+    "employment_experience": 8,
+    "monthly_income": 50000,
+    "monthly_expenses": 32499,
+    "existing_loans": [
+      {
+        "type": "Personal loan",
+        "outstanding_amount": 120000
+      }
+    ],
+    "monthly_emi": 10000,
+    "loan_history": [],
+    "synthetic_data": true
+  },
+  {
+    "user_id": "SB10003",
+    "customer_id": "SB10003",
+    "name": "Rahul Mehta",
+    "email": "customer3@smartbank.demo",
+    "account_id": "ACC-SB10003",
+    "masked_account_number": "XXXX XXXX 1003",
+    "ifsc": "SMBK0000420",
+    "account_type": "Savings",
+    "available_balance": 54800,
+    "opening_balance": 32686.53,
+    "opening_date": "2024-01-20",
+    "annual_income": 420000,
+    "employment_type": "Salaried",
+    "employment_experience": 11,
+    "monthly_income": 35000,
+    "monthly_expenses": 25200,
+    "existing_loans": [
+      {
+        "type": "Personal loan",
+        "outstanding_amount": 90000
+      }
+    ],
+    "monthly_emi": 7500,
+    "loan_history": [],
+    "synthetic_data": true
+  },
+  {
+    "user_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "customer_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "name": "Mithalesh",
+    "email": "mithalesh@edu.in",
+    "account_id": "ACC-C0266F345735",
+    "masked_account_number": "XXXX XXXX 7145",
+    "ifsc": "SMBK0000420",
+    "account_type": "Savings",
+    "available_balance": 0,
+    "opening_balance": 0,
+    "opening_date": "2026-11-05",
+    "annual_income": 0,
+    "employment_type": "Not provided",
+    "employment_experience": 0,
+    "monthly_income": 0,
+    "monthly_expenses": 0,
+    "existing_loans": [],
+    "monthly_emi": 0,
+    "loan_history": [],
+    "synthetic_data": true
+  }
+]

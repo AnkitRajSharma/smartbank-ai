@@ -1,0 +1,50 @@
+[
+  {
+    "user_id": "SB10001",
+    "score": 785,
+    "category": "Excellent",
+    "utilization_percent": 18,
+    "monthly_emi": 0,
+    "debt_to_income_ratio": 0.0,
+    "repayment_history": "Synthetic demonstration history",
+    "insights": [
+      "Consistent on-time payment pattern in this synthetic profile."
+    ]
+  },
+  {
+    "user_id": "SB10002",
+    "score": 695,
+    "category": "Fair",
+    "utilization_percent": 42,
+    "monthly_emi": 10000,
+    "debt_to_income_ratio": 0.2,
+    "repayment_history": "Synthetic demonstration history",
+    "insights": [
+      "Review repayment consistency and keep utilization manageable."
+    ]
+  },
+  {
+    "user_id": "SB10003",
+    "score": 590,
+    "category": "Poor",
+    "utilization_percent": 67,
+    "monthly_emi": 7500,
+    "debt_to_income_ratio": 0.214,
+    "repayment_history": "Synthetic demonstration history",
+    "insights": [
+      "Review repayment consistency and keep utilization manageable."
+    ]
+  },
+  {
+    "user_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "score": 600,
+    "category": "Illustrative",
+    "utilization_percent": 0,
+    "monthly_emi": 0,
+    "debt_to_income_ratio": 0,
+    "repayment_history": "Not available",
+    "insights": [
+      "Add financial details with a lender to assess an actual credit profile."
+    ]
+  }
+]

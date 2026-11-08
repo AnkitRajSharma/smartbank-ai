@@ -1,0 +1,42 @@
+[
+  {
+    "user_id": "SB10001",
+    "name": "Aarav Sharma",
+    "email": "customer1@smartbank.demo",
+    "role": "customer",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$yoEP9Ysjx5hbWEuQJYQ8Gw$L769Gk0enRG2Khfdl/clEVpwnoefn1mi9KNxP3n83qY",
+    "created_at": "2026-11-05T15:51:35+00:00"
+  },
+  {
+    "user_id": "SB10002",
+    "name": "Priya Verma",
+    "email": "customer2@smartbank.demo",
+    "role": "customer",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$5lfzaDAedYyAsMH3Hk1HpA$9NSecPU0WzX467baHXCF08jWpEcJXndxkQ6wrmGwao0",
+    "created_at": "2026-11-05T15:51:35+00:00"
+  },
+  {
+    "user_id": "SB10003",
+    "name": "Rahul Mehta",
+    "email": "customer3@smartbank.demo",
+    "role": "customer",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$XoPdienHXfPwnex5mhwCng$uVKIKXhIRwydriMR+aTEYxu5wyXMH3xfzATiGyuJajc",
+    "created_at": "2026-11-05T15:51:35+00:00"
+  },
+  {
+    "user_id": "demo-admin-001",
+    "name": "SmartBank Analytics",
+    "email": "analytics@smartbank.demo",
+    "role": "admin",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$M+dKzIJULYqaZwPJcsG9uQ$aL3acy1zyJcsRdhlMqjQicMM7CCRwBNvcSxxIfz0qBo",
+    "created_at": "2026-11-05T15:51:35+00:00"
+  },
+  {
+    "user_id": "eab63856-da3f-4c96-bcaa-5facbefa8064",
+    "name": "Mithalesh",
+    "email": "mithalesh@edu.in",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$6FPhV+zMHQiREbP5U6lcYw$M1HXSgC0pp0ZRSAvHiyeGvfp7GiRke8CJxhVHx0djbE",
+    "role": "customer",
+    "created_at": "2026-11-05T16:24:02+00:00"
+  }
+]
