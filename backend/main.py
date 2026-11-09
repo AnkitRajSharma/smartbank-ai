@@ -13,8 +13,9 @@ try:
 except ImportError:
     pass
 
-from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, ValidationError, field_validator
 
@@ -63,15 +64,10 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="SmartBank AI API", version="4.0.0", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:5500", "http://localhost:5500",
-        "http://127.0.0.1:5501", "http://localhost:5501",
-        "http://127.0.0.1:5502", "http://localhost:5502",
-        "http://127.0.0.1:8000", "http://localhost:8000",
-    ],
+    allow_origin_regex=r"^https?://.*",
     allow_credentials=True,
-    allow_methods=["GET", "POST", "DELETE"],
-    allow_headers=["Content-Type"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 app.include_router(auth_router)
 app.include_router(applications_router)
@@ -115,8 +111,9 @@ def _require_model(model: Any | None, model_name: str) -> Any:
 
 
 @app.get("/")
-def root() -> dict[str, str]:
-    return {"message": "SmartBank AI Backend is running"}
+def root() -> RedirectResponse:
+    """Redirect root requests directly to the frontend login page."""
+    return RedirectResponse(url="/app/login.html", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 
 
 @app.get("/health")

@@ -12,7 +12,16 @@ def load_pipeline() -> Any:
     import joblib
 
     if not MODEL_PATH.exists():
-        raise FileNotFoundError(f"Loan model not found at {MODEL_PATH}")
+        MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            import sys
+            train_dir = str(Path(__file__).resolve().parent / "training")
+            if train_dir not in sys.path:
+                sys.path.insert(0, train_dir)
+            from backend.training.train_loan import main as train_loan
+            train_loan()
+        except Exception as e:
+            raise FileNotFoundError(f"Loan model not found at {MODEL_PATH} and auto-training failed: {e}")
     return joblib.load(MODEL_PATH)
 
 

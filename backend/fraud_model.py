@@ -10,7 +10,16 @@ def load_pipeline() -> Any:
     import joblib
 
     if not MODEL_PATH.exists():
-        raise FileNotFoundError(f"Fraud model not found at {MODEL_PATH}")
+        MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            import sys
+            train_dir = str(Path(__file__).resolve().parent / "training")
+            if train_dir not in sys.path:
+                sys.path.insert(0, train_dir)
+            from backend.training.train_fraud import main as train_fraud
+            train_fraud()
+        except Exception as e:
+            raise FileNotFoundError(f"Fraud model not found at {MODEL_PATH} and auto-training failed: {e}")
     return joblib.load(MODEL_PATH)
 
 

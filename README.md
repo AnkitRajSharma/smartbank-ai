@@ -46,6 +46,19 @@ For subsequent runs, activate `.venv` and run only:
 uvicorn backend.main:app --reload
 ```
 
+## Cloud Deployment (Render, Railway, etc.)
+
+This repository is pre-configured for one-click deployment on [Render](https://render.com) using the included `render.yaml` Blueprint:
+
+- **Build Command:** `pip install -r requirements.txt`
+- **Start Command:** `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+- **Health Check Path:** `/health`
+- **Environment Variables:**
+  - `PYTHON_VERSION`: `3.11.9`
+  - `GEMINI_API_KEY`: *(Optional)* Your Gemini API key for the AI assistant.
+
+> Root requests (`/`) automatically redirect to `/app/login.html`, and `uvicorn main:app` can also be used interchangeably from the root folder.
+
 ## 3. Demo login
 
 | Role | Email | Password |
@@ -90,6 +103,8 @@ smartbank-ai/
 │   │   └── user_documents/   # Isolated per-user uploaded documents (RAG indexed)
 │   ├── models/               # Pre-trained ML pipelines
 │   └── training/             # Reproducible model training and datasets
+├── main.py                   # Root entrypoint alias for cloud environments
+├── render.yaml               # Render Infrastructure as Code blueprint
 ├── .env.example              # Safe configuration template
 ├── requirements.txt          # Python dependencies (FastAPI + RAG + Gemini)
 └── README.md                 # Setup and usage guide
