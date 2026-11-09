@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loan Eligibility Checker | SmartBank AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-protected="true">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand-lockup" href="dashboard.html">
+        <span class="brand-mark">S</span>
+        <span><strong>SmartBank AI</strong><small>Personal banking</small></span>
+      </a>
+      <nav class="side-nav">
+        <a href="dashboard.html">Overview</a>
+        <a href="index.html">Banking assistant</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="credit.html">Credit profile</a>
+        <a href="analytics.html">Spending analytics</a>
+        <a class="active" href="loan-eligibility.html">Loan eligibility</a>
+        <a href="apply-loan.html">Apply for a loan</a>
+        <a href="applications.html">My applications</a>
+        <a href="fraud-detection.html">Fraud detection</a>
+        <a href="portfolio.html" data-admin-only hidden>Portfolio analytics</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+      <button class="logout-button" data-logout>Sign out</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-heading">
+        <div>
+          <p class="eyebrow">SMART LENDING AI</p>
+          <h1>Loan eligibility checker</h1>
+          <p class="muted">Instant machine learning risk assessment and borrowing capacity analysis.</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button class="secondary-button" id="autofill-loan-btn" type="button" title="Populate form with your authenticated SmartBank records">
+            ⚡ Fill from my profile
+          </button>
+          <a class="primary-button link-button" href="apply-loan.html">Official application →</a>
+        </div>
+      </header>
+
+      <div class="notice-banner">
+        <strong>About this AI model</strong>
+        <span>This experimental pipeline evaluates approval probability and top risk factors. Estimates are illustrative and do not constitute formal bank underwriting approval.</span>
+      </div>
+
+      <section class="content-card form-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">APPLICATION PARAMETERS</p>
+            <h2>Enter scenario details</h2>
+          </div>
+          <span class="status-pill status-active">AI Model Ready</span>
+        </div>
+
+        <form id="loan-form" class="application-form">
+          <label>
+            Age
+            <input name="age" id="loan-age" type="number" min="18" max="100" value="30" required>
+          </label>
+          <label>
+            Annual income (₹)
+            <input name="annual_income" id="loan-income" type="number" min="1" step="0.01" placeholder="e.g. 750000" required>
+          </label>
+          <label>
+            Employment type
+            <select name="employment_type" id="loan-employment" required>
+              <option value="">Choose one</option>
+              <option value="Salaried" selected>Salaried</option>
+              <option value="Self-employed">Self-employed</option>
+              <option value="Contract">Contract</option>
+            </select>
+          </label>
+          <label>
+            Employment experience (years)
+            <input name="employment_experience" id="loan-experience" type="number" min="0" max="80" step="0.1" value="4.5" required>
+          </label>
+          <label>
+            Credit score (CIBIL / Bureau)
+            <input name="credit_score" id="loan-credit" type="number" min="300" max="900" placeholder="e.g. 760" required>
+          </label>
+          <label>
+            Existing loan amount (₹)
+            <input name="existing_loan_amount" id="loan-existing" type="number" min="0" step="0.01" value="0" required>
+          </label>
+          <label>
+            Monthly debt / EMI total (₹)
+            <input name="monthly_debt" id="loan-debt" type="number" min="0" step="0.01" value="0" required>
+          </label>
+          <label>
+            Requested loan amount (₹)
+            <input name="requested_loan_amount" id="loan-requested" type="number" min="1" step="0.01" placeholder="e.g. 500000" required>
+          </label>
+          <div class="form-actions full-span">
+            <button class="primary-button" type="submit" id="loan-submit-btn">Evaluate loan eligibility</button>
+            <button class="secondary-button" type="reset">Reset</button>
+          </div>
+        </form>
+
+        <div class="prediction-result" id="loan-result" aria-live="polite" style="margin-top: 15px;"></div>
+      </section>
+
+      <section class="metric-grid" style="margin-top: 25px;">
+        <article class="metric-card">
+          <span>Benchmark interest rate</span>
+          <strong>10.49% p.a.</strong>
+          <small>Reducing balance</small>
+        </article>
+        <article class="metric-card">
+          <span>Max debt-to-income (FOIR)</span>
+          <strong>50%</strong>
+          <small>Prudent lending cap</small>
+        </article>
+        <article class="metric-card">
+          <span>Prime credit score</span>
+          <strong>750+</strong>
+          <small>Lowest rate tier</small>
+        </article>
+        <article class="metric-card">
+          <span>Need consultation?</span>
+          <a class="text-link" href="index.html" style="font-weight: 700;">Open AI Assistant →</a>
+          <small>Chat with Agentic AI</small>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

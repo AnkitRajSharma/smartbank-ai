@@ -9,18 +9,23 @@ MODEL_PATH = Path(__file__).resolve().parent / "models" / "fraud_pipeline.pkl"
 def load_pipeline() -> Any:
     import joblib
 
-    if not MODEL_PATH.exists():
-        MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            import sys
-            train_dir = str(Path(__file__).resolve().parent / "training")
-            if train_dir not in sys.path:
-                sys.path.insert(0, train_dir)
-            from backend.training.train_fraud import main as train_fraud
-            train_fraud()
-        except Exception as e:
-            raise FileNotFoundError(f"Fraud model not found at {MODEL_PATH} and auto-training failed: {e}")
-    return joblib.load(MODEL_PATH)
+    target_path = MODEL_PATH
+    if not target_path.exists():
+        fallback = MODEL_PATH.with_suffix(".pkl.jpg")
+        if fallback.exists():
+            target_path = fallback
+        else:
+            MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                import sys
+                train_dir = str(Path(__file__).resolve().parent / "training")
+                if train_dir not in sys.path:
+                    sys.path.insert(0, train_dir)
+                from backend.training.train_fraud import main as train_fraud
+                train_fraud()
+            except Exception as e:
+                raise FileNotFoundError(f"Fraud model not found at {MODEL_PATH} and auto-training failed: {e}")
+    return joblib.load(target_path)
 
 
 def predict_fraud(pipeline: Any, payload: dict[str, Any]) -> dict[str, Any]:

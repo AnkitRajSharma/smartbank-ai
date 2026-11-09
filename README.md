@@ -83,8 +83,10 @@ Install the optional SDK with `pip install -r requirements-gemini.txt`, then ope
 ```text
 smartbank-ai/
 ├── frontend/                 # HTML pages, CSS and browser JavaScript
-│   ├── index.html            # Unified BFSI Banking Assistant UI
+│   ├── index.html            # Unified BFSI Banking Assistant UI with Agentic AI tools
 │   ├── dashboard.html        # Customer banking overview & cards
+│   ├── loan-eligibility.html # Loan Eligibility Checker with ML assessment & profile auto-fill
+│   ├── fraud-detection.html  # Fraud Detection Scanner & Transaction Risk Simulator
 │   ├── style.css             # Cohesive styling & design system
 │   └── script.js             # Client API integration & RAG upload
 ├── backend/

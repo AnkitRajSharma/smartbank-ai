@@ -19,5 +19,11 @@ backend/data/*.lock
 backend/data/*.tmp
 backend/data/user_documents/
 
+# Archives & Temporary files
+*.zip
+*.tar.gz
+*.rar
+backend/models/*.pkl.jpg
+
 # Model training logs & visual plots (keep trained model .pkl files tracked in backend/models/)
 backend/training/reports/

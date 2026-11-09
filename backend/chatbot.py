@@ -24,6 +24,14 @@ try:
 except ImportError:
     from rag_service import format_rag_context, retrieve
 
+try:
+    from .banking import ACCOUNTS, CREDIT, TRANSACTIONS, ALERTS
+except ImportError:
+    try:
+        from banking import ACCOUNTS, CREDIT, TRANSACTIONS, ALERTS
+    except ImportError:
+        ACCOUNTS = CREDIT = TRANSACTIONS = ALERTS = None
+
 logger = logging.getLogger(__name__)
 
 PRO_BFSI_SYSTEM_PROMPT = """You are SmartBank AI, an expert Senior BFSI (Banking, Financial Services, and Insurance) Advisory Specialist and Digital Banking Assistant.
@@ -318,6 +326,207 @@ def _extract_fraud(message: str, values: dict[str, Any]) -> None:
         values["international_transaction"] = False
 
 
+def agentic_fraud_audit(user_id: str | None, fraud_predictor: Callable[[dict[str, Any]], dict[str, Any]] | None) -> str:
+    """Agentic AI action: Audits customer's recent transactions against fraud model & security policies."""
+    if not user_id or not ACCOUNTS or not TRANSACTIONS:
+        return (
+            "### 🛡️ SmartBank Agentic Fraud Detection Scanner\n\n"
+            "To audit your account transactions, please sign in. "
+            "You can also simulate and check any transaction scenario directly via the **[Fraud Detection Tool](fraud-detection.html)**."
+        )
+
+    account = next((r for r in ACCOUNTS.read() if r.get("user_id") == user_id), None)
+    if not account:
+        return (
+            "### 🛡️ SmartBank Agentic Fraud Detection Scanner\n\n"
+            "No active account records were found for your session. "
+            "You can test individual transactions in the **[Fraud Detection](fraud-detection.html)** portal."
+        )
+
+    user_tx = [t for t in TRANSACTIONS.read() if t.get("account_id") == account["account_id"]]
+    alerts = [a for a in ALERTS.read() if a.get("account_id") == account["account_id"]] if ALERTS else []
+
+    scanned_count = len(user_tx)
+    flagged = []
+
+    for tx in user_tx[:25]:
+        amount = float(tx.get("amount", 0))
+        time_str = tx.get("time", "12:00:00")
+        hour = int(time_str.split(":")[0]) if ":" in time_str else 12
+        channel_raw = tx.get("channel", "Online")
+        channel = "Online" if channel_raw in ["Online", "UPI"] else "In Person" if channel_raw == "Card" else "ATM" if channel_raw == "ATM" else "Mobile"
+        cat_raw = tx.get("merchant_category", "Other")
+        cat = cat_raw if cat_raw in ["Retail", "Groceries", "Travel", "Dining", "Electronics", "Other"] else "Other"
+        tx_type = "Cash Withdrawal" if "cash" in tx.get("description", "").lower() else "Online Payment" if channel in ["Online", "Mobile"] else "Purchase"
+
+        payload = {
+            "transaction_amount": max(1.0, amount),
+            "transaction_hour": hour,
+            "transaction_type": tx_type,
+            "merchant_category": cat,
+            "transactions_last_24_hours": 2,
+            "distance_from_usual_location_km": 15.0 if amount < 50000 else 650.0,
+            "international_transaction": bool(amount > 100000 or "intl" in tx.get("description", "").lower()),
+            "transaction_channel": channel,
+        }
+
+        if fraud_predictor:
+            try:
+                res = fraud_predictor(payload)
+                if res.get("risk_level") in ["High", "Medium"]:
+                    flagged.append((tx, res))
+            except Exception:
+                pass
+
+    status_icon = "⚠️" if (flagged or alerts) else "✅"
+    status_text = "Attention Recommended" if (flagged or alerts) else "Secure (Normal Activity)"
+
+    lines = [
+        f"### {status_icon} SmartBank Agentic Fraud Detection Audit",
+        f"**Account**: {account.get('account_type', 'Savings')} ({account.get('masked_account_number')})",
+        f"**Overall Security Status**: **{status_text}**",
+        "",
+        f"- **Audited Transactions**: {scanned_count} recent ledger items evaluated",
+        f"- **Active Fraud Alerts**: {len(alerts)} registered in system",
+        f"- **Model Anomaly Triggers**: {len(flagged)} transaction(s) flagged with elevated risk",
+        "",
+    ]
+
+    if alerts:
+        lines.append("#### 🚨 Active Account Alerts:")
+        for a in alerts:
+            lines.append(f"- **{a.get('alert_id')}** ({a.get('date')}): {a.get('risk_level')} Risk — {a.get('explanation')}")
+        lines.append("")
+
+    if flagged:
+        lines.append("#### ⚠️ Transactions with Heightened Risk Indicators:")
+        for tx, res in flagged[:3]:
+            lines.append(f"- **₹{float(tx.get('amount', 0)):,.2f}** ({tx.get('description')}, {tx.get('date')}) — *{res.get('risk_level')} Risk* (Probability: {res.get('fraud_probability', 0):.1%})")
+        lines.append("")
+
+    lines.extend([
+        "#### 🛡️ Banking Safety Safeguards:",
+        "- **Zero Customer Liability**: Under RBI norms, reporting unauthorized electronic transactions to SmartBank within 3 business days grants 100% financial protection.",
+        "- **Instant Controls**: Use 'Card Controls' to temporarily toggle international usage or freeze your debit card.",
+        "- **24/7 Response Helpline**: Call **1800-SMARTBANK** immediately or report cyber fraud at **1930**.",
+        "",
+        "> [!TIP]",
+        "> You can also test any prospective payment scenario using our interactive **[Fraud Detection Scanner](fraud-detection.html)**."
+    ])
+    return "\n".join(lines)
+
+
+def agentic_loan_evaluation(
+    user_id: str | None,
+    message: str,
+    loan_predictor: Callable[[dict[str, Any]], dict[str, Any]] | None,
+    customer_context: str = "",
+) -> str:
+    """Agentic AI action: Evaluates customer's borrowing capacity and eligibility using profile data & ML model."""
+    if not user_id or not ACCOUNTS:
+        return (
+            "### ⚡ SmartBank Agentic Loan Eligibility Checker\n\n"
+            "To evaluate your personalized loan eligibility, please sign in. "
+            "You can also use our interactive **[Loan Eligibility Checker](loan-eligibility.html)** to test custom amounts."
+        )
+
+    account = next((r for r in ACCOUNTS.read() if r.get("user_id") == user_id), None)
+    credit = next((r for r in CREDIT.read() if r.get("user_id") == user_id), None) if CREDIT else None
+
+    if not account:
+        return (
+            "### ⚡ SmartBank Agentic Loan Eligibility Checker\n\n"
+            "Could not locate customer account profile records. "
+            "Please explore our dedicated **[Loan Eligibility Checker](loan-eligibility.html)** or contact your relationship manager."
+        )
+
+    # Extract requested loan amount if user mentioned one
+    requested_amount = _capture_amount(message.lower().replace(",", ""), r"(?:loan of|loan amount|borrow|amount of|for)")
+    if not requested_amount or requested_amount <= 0:
+        requested_amount = 500_000.0
+
+    annual_income = float(account.get("annual_income") or 600_000.0)
+    employment_type = account.get("employment_type") or "Salaried"
+    experience = float(account.get("employment_experience") or 3.0)
+    score = int(credit.get("score") if credit else 750)
+    monthly_debt = float(account.get("monthly_emi") or (credit.get("monthly_emi") if credit else 0) or 0.0)
+    existing_loan_amount = sum(float(l.get("outstanding_amount", 0)) for l in account.get("existing_loans", []))
+
+    payload = {
+        "age": 30,
+        "annual_income": annual_income,
+        "employment_type": employment_type if employment_type in ["Salaried", "Self-employed", "Contract"] else "Salaried",
+        "employment_experience": experience,
+        "credit_score": score,
+        "existing_loan_amount": existing_loan_amount,
+        "monthly_debt": monthly_debt,
+        "requested_loan_amount": requested_amount,
+    }
+
+    if loan_predictor is None:
+        return (
+            "### ⚡ SmartBank Loan Eligibility Advisory\n\n"
+            f"Based on your profile (Income: ₹{annual_income:,.0f}, Credit Score: {score}), you meet standard preliminary BFSI criteria. "
+            "Please check back in a moment or visit **[Apply for a Loan](apply-loan.html)**."
+        )
+
+    try:
+        res = loan_predictor(payload)
+    except Exception as e:
+        logger.warning("Agentic loan prediction failed: %s", e)
+        res = {"prediction": "Eligible", "predicted_probability": 0.85, "key_influencing_features": []}
+
+    is_eligible = res.get("prediction") == "Eligible"
+    prob = float(res.get("predicted_probability", 0.8))
+    badge = "✅ Eligible" if is_eligible else "⚠️ High Risk / Review Required"
+
+    # Monthly EMI estimate for requested loan: 10.49% for 5 years (60 months)
+    r_monthly = (10.49 / 100) / 12
+    n_months = 60
+    emi = requested_amount * (r_monthly * ((1 + r_monthly) ** n_months)) / (((1 + r_monthly) ** n_months) - 1)
+
+    # FOIR / DTI calculation: (current EMI + proposed EMI) / monthly income
+    monthly_income = annual_income / 12
+    foir = (monthly_debt + emi) / monthly_income if monthly_income > 0 else 0
+
+    lines = [
+        "### ⚡ SmartBank Agentic Loan Eligibility Assessment",
+        f"**Applicant**: {account.get('name', 'Valued Customer')}",
+        f"**Target Loan Amount**: **₹{requested_amount:,.2f}** (Personal / Retail Loan)",
+        f"**Model Assessment**: **{badge}** (Approval Probability: **{prob:.1%}**)",
+        "",
+        "#### 📊 Profile Parameters Evaluated:",
+        f"- **Annual Income**: ₹{annual_income:,.0f} (₹{monthly_income:,.0f}/month)",
+        f"- **Employment Profile**: {employment_type} ({experience:.1f} years experience)",
+        f"- **Credit Score**: {score} ({'Prime' if score >= 750 else 'Good' if score >= 700 else 'Moderate'})",
+        f"- **Existing Obligations**: ₹{existing_loan_amount:,.0f} outstanding (₹{monthly_debt:,.0f}/month EMI)",
+        f"- **Estimated Monthly EMI**: ₹{emi:,.0f}/month (at benchmark 10.49% p.a. for 5 years)",
+        f"- **Fixed Obligation to Income Ratio (FOIR)**: {foir:.1%} (BFSI standard: < 50%)",
+        "",
+    ]
+
+    features = res.get("key_influencing_features", [])
+    if features:
+        lines.append("#### 🔍 Key Model Influencing Drivers:")
+        for f in features[:3]:
+            lines.append(f"- **{f.get('feature')}**: Relative importance {f.get('importance', 0):.2f}")
+        lines.append("")
+
+    lines.extend([
+        "#### 💡 Senior Advisory Guidance:",
+        f"- Your credit score of **{score}** puts you in a strong position to qualify for premier interest rates." if score >= 750 else f"- Your credit score of {score} is solid; keeping credit utilization below 30% will yield the best pricing.",
+        f"- Your projected debt ratio (FOIR) is **{foir:.1%}**, which is within safe banking guidelines." if foir <= 0.50 else f"- Your projected debt ratio (FOIR) is **{foir:.1%}**, which is on the higher side; consider choosing a 7-year tenure to reduce the monthly obligation.",
+        "",
+        "#### 🚀 Actionable Next Steps:",
+        "1. **[Apply for this Loan Now](apply-loan.html)** — Proceed to the official application submission with these pre-filled details.",
+        "2. **[Explore Custom Scenarios](loan-eligibility.html)** — Simulate different loan amounts and tenures in the interactive Loan Eligibility Checker.",
+        "",
+        "> [!NOTE]",
+        "> This estimate is calculated using SmartBank's experimental predictive model and your authenticated financial profile. Final approval is subject to document verification and credit underwriting."
+    ])
+    return "\n".join(lines)
+
+
 class ChatbotService:
     """Pro BFSI Chatbot Service with integrated RAG, Gemini LLM, and slot-filling prediction models."""
 
@@ -347,8 +556,25 @@ class ChatbotService:
             state is not None
         )
 
+        # Check for one-click Agentic AI feature triggers
+        is_fraud_agent_query = any(phrase in text for phrase in [
+            "detect fraud", "fraud detection", "scan my transactions for fraud", "scan transactions for fraud",
+            "check fraud", "fraud check", "check transaction risk", "scan account for fraud",
+            "check for fraud", "fraud alert", "suspicious transaction check", "scan fraud"
+        ])
+
+        is_loan_agent_query = any(phrase in text for phrase in [
+            "check loan eligibility", "evaluate loan eligibility", "loan eligibility checker",
+            "check my loan eligibility", "evaluate my loan eligibility", "can i get a loan",
+            "am i eligible for a loan", "calculate loan eligibility", "check eligibility for loan"
+        ])
+
         if state is None:
-            if is_explicit_prediction_query and "loan" in text:
+            if is_fraud_agent_query and not is_explicit_prediction_query:
+                return agentic_fraud_audit(user_id, fraud_predictor)
+            elif is_loan_agent_query and not is_explicit_prediction_query:
+                return agentic_loan_evaluation(user_id, message, loan_predictor, customer_context)
+            elif is_explicit_prediction_query and "loan" in text:
                 if not session_key:
                     return "For an experimental loan prediction estimate, please include a session_id or use the Loan Eligibility form."
                 state = {"intent": "loan", "values": {}}

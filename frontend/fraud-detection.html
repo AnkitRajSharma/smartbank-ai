@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fraud Detection & Risk Scanner | SmartBank AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-protected="true">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand-lockup" href="dashboard.html">
+        <span class="brand-mark">S</span>
+        <span><strong>SmartBank AI</strong><small>Personal banking</small></span>
+      </a>
+      <nav class="side-nav">
+        <a href="dashboard.html">Overview</a>
+        <a href="index.html">Banking assistant</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="credit.html">Credit profile</a>
+        <a href="analytics.html">Spending analytics</a>
+        <a href="loan-eligibility.html">Loan eligibility</a>
+        <a href="apply-loan.html">Apply for a loan</a>
+        <a href="applications.html">My applications</a>
+        <a class="active" href="fraud-detection.html">Fraud detection</a>
+        <a href="portfolio.html" data-admin-only hidden>Portfolio analytics</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+      <button class="logout-button" data-logout>Sign out</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-heading">
+        <div>
+          <p class="eyebrow">AI SECURITY & PROTECTION</p>
+          <h1>Fraud detection scanner</h1>
+          <p class="muted">Real-time machine learning anomaly detection and continuous transaction auditing.</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button class="secondary-button" id="scan-all-tx-btn" type="button">
+            🤖 AI scan account transactions
+          </button>
+          <a class="primary-button link-button" href="index.html">Consult AI Assistant →</a>
+        </div>
+      </header>
+
+      <div class="notice-banner">
+        <strong>Fraud Protection Notice</strong>
+        <span>SmartBank AI continuously audits ledger activity for risk signals. Under RBI guidelines, reporting unauthorized debits within 3 days ensures 100% Zero Customer Liability protection.</span>
+      </div>
+
+      <!-- Account Fraud Alerts Section -->
+      <section class="content-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SYSTEM SECURITY LOG</p>
+            <h2>Active fraud alerts</h2>
+          </div>
+          <span class="status-pill status-active" id="security-status-badge">Shield Active</span>
+        </div>
+        <div id="fraud-alerts">Loading security alerts…</div>
+      </section>
+
+      <!-- Recent Transactions Scanner Table -->
+      <section class="content-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">LEDGER AUDIT</p>
+            <h2>Recent transactions risk analysis</h2>
+          </div>
+          <p class="muted" style="margin: 0; font-size: 12px;">Audited against trained ML anomaly pipeline</p>
+        </div>
+        <div id="fraud-scan-table" class="table-wrap">
+          <p class="muted">Loading transaction audit…</p>
+        </div>
+      </section>
+
+      <!-- Custom Transaction Simulator Form -->
+      <section class="content-card form-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TRANSACTION SIMULATOR</p>
+            <h2>Check prospective transaction risk</h2>
+          </div>
+          <span class="status-pill status-active">Interactive ML Detector</span>
+        </div>
+        <p class="muted" style="margin-top: -10px; margin-bottom: 15px; font-size: 13px;">
+          Input prospective transaction metrics to simulate how our fraud detection model scores risk indicators.
+        </p>
+
+        <form id="fraud-form" class="application-form">
+          <label>
+            Transaction amount (₹)
+            <input name="transaction_amount" id="fraud-amount" type="number" min="0.01" step="0.01" placeholder="e.g. 15000" required>
+          </label>
+          <label>
+            Transaction hour (0–23)
+            <input name="transaction_hour" id="fraud-hour" type="number" min="0" max="23" value="14" required>
+          </label>
+          <label>
+            Transaction type
+            <select name="transaction_type" id="fraud-type" required>
+              <option value="">Choose one</option>
+              <option value="Purchase" selected>Purchase</option>
+              <option value="Cash Withdrawal">Cash Withdrawal</option>
+              <option value="Transfer">Transfer</option>
+              <option value="Online Payment">Online Payment</option>
+            </select>
+          </label>
+          <label>
+            Merchant category
+            <select name="merchant_category" id="fraud-category" required>
+              <option value="">Choose one</option>
+              <option value="Retail">Retail</option>
+              <option value="Groceries" selected>Groceries</option>
+              <option value="Travel">Travel</option>
+              <option value="Dining">Dining</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>
+            Transactions in last 24 hours
+            <input name="transactions_last_24_hours" id="fraud-velocity" type="number" min="0" value="2" required>
+          </label>
+          <label>
+            Distance from usual location (km)
+            <input name="distance_from_usual_location_km" id="fraud-distance" type="number" min="0" step="0.1" value="12" required>
+          </label>
+          <label>
+            International transaction
+            <select name="international_transaction" id="fraud-intl" required>
+              <option value="false" selected>No (Domestic)</option>
+              <option value="true">Yes (International)</option>
+            </select>
+          </label>
+          <label>
+            Transaction channel
+            <select name="transaction_channel" id="fraud-channel" required>
+              <option value="">Choose one</option>
+              <option value="Online" selected>Online</option>
+              <option value="In Person">In Person</option>
+              <option value="Mobile">Mobile</option>
+              <option value="ATM">ATM</option>
+            </select>
+          </label>
+          <div class="form-actions full-span">
+            <button class="primary-button" type="submit" id="fraud-submit-btn">Run fraud risk check</button>
+            <button class="secondary-button" type="reset">Reset</button>
+          </div>
+        </form>
+
+        <div class="prediction-result" id="fraud-result" aria-live="polite" style="margin-top: 15px;"></div>
+      </section>
+
+      <!-- Emergency Helpline and Action Grid -->
+      <section class="metric-grid" style="margin-top: 25px;">
+        <article class="metric-card">
+          <span>24/7 SmartBank Helpline</span>
+          <strong>1800-SMARTBANK</strong>
+          <small>Toll-free emergency hotline</small>
+        </article>
+        <article class="metric-card">
+          <span>National Cyber Helpline</span>
+          <strong>1930</strong>
+          <small>Government cybercrime desk</small>
+        </article>
+        <article class="metric-card">
+          <span>Zero Liability Window</span>
+          <strong>72 Hours</strong>
+          <small>Notify bank immediately</small>
+        </article>
+        <article class="metric-card">
+          <span>Ask Agentic AI</span>
+          <a class="text-link" href="index.html" style="font-weight: 700;">Open Assistant →</a>
+          <small>Instant advice & security guidance</small>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -332,6 +332,8 @@ function setupChat() {
   const uploadedDocLabel = document.getElementById('uploaded-doc-label');
   const clearDocBtn = document.getElementById('clear-uploaded-doc');
 
+  const headerRagBtn = document.getElementById('btn-header-rag');
+  headerRagBtn?.addEventListener('click', () => docUploadInput?.click());
   toolUploadBtn?.addEventListener('click', () => docUploadInput?.click());
 
   // Check active indexed user documents on load
@@ -394,14 +396,113 @@ function setupChat() {
   document.querySelectorAll('.suggestion-chip').forEach((button) => button.addEventListener('click', () => { messageInput.value = button.textContent; chatForm.requestSubmit(); }));
   document.querySelectorAll('[data-open-dialog]').forEach((button) => button.addEventListener('click', () => document.getElementById(button.dataset.openDialog)?.showModal()));
   document.querySelectorAll('[data-close-dialog]').forEach((button) => button.addEventListener('click', () => button.closest('dialog')?.close()));
+
+  const inlineBtnFraud = document.getElementById('inline-btn-fraud') || document.getElementById('btn-agent-fraud');
+  if (inlineBtnFraud) {
+    inlineBtnFraud.addEventListener('click', () => {
+      messageInput.value = 'Detect fraud in my account';
+      chatForm.requestSubmit();
+    });
+  }
+
+  const inlineBtnLoan = document.getElementById('inline-btn-loan') || document.getElementById('btn-agent-loan');
+  if (inlineBtnLoan) {
+    inlineBtnLoan.addEventListener('click', () => {
+      messageInput.value = 'Check my loan eligibility';
+      chatForm.requestSubmit();
+    });
+  }
+
+  const dialogAutofillLoan = document.getElementById('dialog-autofill-loan');
+  if (dialogAutofillLoan) {
+    dialogAutofillLoan.addEventListener('click', async () => {
+      try {
+        dialogAutofillLoan.disabled = true;
+        dialogAutofillLoan.textContent = 'Loading…';
+        const profile = await api('/api/agent/loan-profile');
+        const form = document.getElementById('loan-dialog')?.querySelector('form') || document.getElementById('loan-form');
+        if (form && profile) {
+          for (const [key, val] of Object.entries(profile)) {
+            if (form.elements[key]) form.elements[key].value = val;
+          }
+        }
+        dialogAutofillLoan.textContent = '✓ Filled';
+        window.setTimeout(() => { dialogAutofillLoan.textContent = '⚡ Auto-fill profile'; dialogAutofillLoan.disabled = false; }, 1800);
+      } catch (_) {
+        dialogAutofillLoan.textContent = 'Error';
+        dialogAutofillLoan.disabled = false;
+      }
+    });
+  }
 }
 
 function showPredictionResult(container, kind, result) {
-  container.replaceChildren(); const card = document.createElement('section'); card.className = 'result-card';
-  const title = document.createElement('h3'); title.textContent = kind === 'loan' ? `Estimate: ${result.prediction}` : `${result.prediction} · ${result.risk_level} risk`; card.appendChild(title);
-  const lines = kind === 'loan' ? [`Model probability: ${(result.predicted_probability * 100).toFixed(1)}%`, result.explanation] : [`Model fraud probability: ${(result.fraud_probability * 100).toFixed(1)}%`, result.recommendation];
-  lines.forEach((text) => { const line = document.createElement('p'); line.textContent = text; card.appendChild(line); });
-  const note = document.createElement('p'); note.textContent = 'Experimental result based on synthetic data; this is not a bank decision.'; card.appendChild(note); container.appendChild(card);
+  if (!container) return;
+  container.replaceChildren();
+  const card = document.createElement('section');
+  card.className = 'result-card';
+
+  if (kind === 'loan') {
+    const isEligible = result.prediction === 'Eligible';
+    const prob = Number(result.predicted_probability || 0);
+    card.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+        <h3 style="margin: 0; font-size: 16px;">
+          Model Decision: <span class="risk-badge ${isEligible ? 'low' : 'high'}" style="font-size: 13px; padding: 4px 10px;">${escapeHTML(result.prediction)}</span>
+        </h3>
+        <strong style="color: ${isEligible ? '#155c5a' : '#a63434'}; font-size: 14px;">${(prob * 100).toFixed(1)}% Approval Probability</strong>
+      </div>
+      <div style="background: #e9f5f2; border-radius: 8px; height: 10px; width: 100%; overflow: hidden; margin-bottom: 12px;">
+        <div style="background: ${isEligible ? '#24795f' : '#dc3545'}; height: 100%; width: ${(prob * 100).toFixed(1)}%;"></div>
+      </div>
+      ${result.key_influencing_features && result.key_influencing_features.length ? `
+        <div style="margin: 10px 0;">
+          <strong style="font-size: 12px; color: #1b4157;">Key Model Features:</strong>
+          <ul style="margin: 6px 0 10px; padding-left: 18px; font-size: 12px; color: #526878;">
+            ${result.key_influencing_features.map(f => `<li><strong>${escapeHTML(f.feature)}</strong>: importance ${f.importance}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      <p style="margin: 8px 0; color: #526878; font-size: 12px; line-height: 1.5;">${escapeHTML(result.explanation || '')}</p>
+      <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+        <a class="primary-button link-button" href="apply-loan.html" style="font-size: 12px; padding: 7px 14px;">Apply for this loan →</a>
+        <a class="secondary-button" href="index.html" style="font-size: 12px; padding: 7px 14px;">Consult AI Assistant</a>
+      </div>
+      <p class="muted" style="margin-top: 10px; font-size: 10px;">Experimental estimate from synthetic training data; not a formal credit decision.</p>
+    `;
+  } else {
+    const risk = result.risk_level || 'Low';
+    const prob = Number(result.fraud_probability || 0);
+    const riskClass = risk.toLowerCase();
+    card.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+        <h3 style="margin: 0; font-size: 16px;">
+          Risk Analysis: <span class="risk-badge ${riskClass}" style="font-size: 13px; padding: 4px 10px;">${escapeHTML(risk)} Risk (${escapeHTML(result.prediction)})</span>
+        </h3>
+        <strong style="color: ${risk === 'High' ? '#a63434' : risk === 'Medium' ? '#9a6b20' : '#24795f'}; font-size: 14px;">
+          ${(prob * 100).toFixed(1)}% Fraud Probability
+        </strong>
+      </div>
+      <div style="background: #f1f5f7; border-radius: 8px; height: 10px; width: 100%; overflow: hidden; margin-bottom: 12px;">
+        <div style="background: ${risk === 'High' ? '#dc3545' : risk === 'Medium' ? '#f0ad4e' : '#28a745'}; height: 100%; width: ${Math.max(5, (prob * 100)).toFixed(1)}%;"></div>
+      </div>
+      ${result.main_suspicious_characteristics && result.main_suspicious_characteristics.length ? `
+        <div style="margin: 10px 0;">
+          <strong style="font-size: 12px; color: #1b4157;">Risk Indicators Evaluated:</strong>
+          <ul style="margin: 6px 0 10px; padding-left: 18px; font-size: 12px; color: #526878;">
+            ${result.main_suspicious_characteristics.map(c => `<li>${escapeHTML(c)}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      <p style="margin: 8px 0; color: #526878; font-size: 12px; line-height: 1.5;">${escapeHTML(result.recommendation || '')}</p>
+      <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+        <a class="secondary-button" href="index.html" style="font-size: 12px; padding: 7px 14px;">Ask AI Assistant for Help</a>
+        <a class="secondary-button" href="transactions.html" style="font-size: 12px; padding: 7px 14px;">View Ledger</a>
+      </div>
+      <p class="muted" style="margin-top: 10px; font-size: 10px;">Statistical risk scoring only; transactions are never blocked automatically by this demo.</p>
+    `;
+  }
+  container.appendChild(card);
 }
 
 function setupPredictionForms() {
@@ -417,8 +518,118 @@ function setupPredictionForms() {
   }
 }
 
+async function setupLoanEligibilityPage() {
+  const autofillBtn = document.getElementById('autofill-loan-btn');
+  if (autofillBtn) {
+    autofillBtn.addEventListener('click', async () => {
+      try {
+        autofillBtn.disabled = true;
+        autofillBtn.textContent = 'Loading profile…';
+        const profile = await api('/api/agent/loan-profile');
+        if (document.getElementById('loan-age')) document.getElementById('loan-age').value = profile.age;
+        if (document.getElementById('loan-income')) document.getElementById('loan-income').value = profile.annual_income;
+        if (document.getElementById('loan-employment')) document.getElementById('loan-employment').value = profile.employment_type;
+        if (document.getElementById('loan-experience')) document.getElementById('loan-experience').value = profile.employment_experience;
+        if (document.getElementById('loan-credit')) document.getElementById('loan-credit').value = profile.credit_score;
+        if (document.getElementById('loan-existing')) document.getElementById('loan-existing').value = profile.existing_loan_amount;
+        if (document.getElementById('loan-debt')) document.getElementById('loan-debt').value = profile.monthly_debt;
+        if (document.getElementById('loan-requested')) document.getElementById('loan-requested').value = profile.requested_loan_amount;
+        autofillBtn.textContent = '✓ Profile Loaded';
+        window.setTimeout(() => { autofillBtn.textContent = '⚡ Fill from my profile'; autofillBtn.disabled = false; }, 2000);
+      } catch (e) {
+        autofillBtn.textContent = 'Failed to load';
+        autofillBtn.disabled = false;
+      }
+    });
+  }
+}
+
+async function setupFraudDetectionPage() {
+  const scanTable = document.getElementById('fraud-scan-table');
+  const scanAllBtn = document.getElementById('scan-all-tx-btn');
+  const statusBadge = document.getElementById('security-status-badge');
+
+  async function loadAndScanTransactions() {
+    if (!scanTable) return;
+    try {
+      scanTable.innerHTML = '<p class="muted">Scanning account ledger with AI fraud pipeline…</p>';
+      const data = await api('/api/agent/scan-transactions-fraud');
+      if (statusBadge) {
+        statusBadge.textContent = data.account_security_status || 'Secure';
+        statusBadge.className = `status-pill ${data.account_security_status === 'Secure' ? 'status-active' : 'status-review'}`;
+      }
+      if (!data.transactions || !data.transactions.length) {
+        scanTable.innerHTML = '<p class="muted">No transactions available to scan.</p>';
+        return;
+      }
+      const rows = data.transactions.slice(0, 15).map(t => {
+        const risk = t.risk_level || 'Low';
+        const riskClass = risk.toLowerCase();
+        return `
+          <tr>
+            <td>${escapeHTML(shortDate(t.date))}</td>
+            <td><strong>${escapeHTML(t.description)}</strong><br><small class="muted">${escapeHTML(t.channel || 'Online')}</small></td>
+            <td>${escapeHTML(t.merchant_category || 'Other')}</td>
+            <td>${money(t.amount)}</td>
+            <td><span class="risk-badge ${riskClass}">${risk} Risk</span></td>
+            <td>
+              <button class="secondary-button tx-scan-btn" type="button" style="padding: 4px 8px; font-size: 11px;"
+                data-amount="${t.amount}"
+                data-hour="${(t.time || '12:00:00').split(':')[0]}"
+                data-cat="${escapeHTML(t.merchant_category || 'Retail')}"
+                data-channel="${escapeHTML(t.channel || 'Online')}">
+                Test in Simulator
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+      scanTable.innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>AI Risk Score</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+
+      scanTable.querySelectorAll('.tx-scan-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (document.getElementById('fraud-amount')) document.getElementById('fraud-amount').value = btn.dataset.amount;
+          if (document.getElementById('fraud-hour')) document.getElementById('fraud-hour').value = btn.dataset.hour;
+          if (document.getElementById('fraud-category')) document.getElementById('fraud-category').value = btn.dataset.cat;
+          document.getElementById('fraud-form')?.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    } catch (e) {
+      scanTable.innerHTML = `<p class="muted">Could not scan transactions: ${escapeHTML(e.message)}</p>`;
+    }
+  }
+
+  if (scanTable) {
+    await loadAndScanTransactions();
+  }
+  if (scanAllBtn) {
+    scanAllBtn.addEventListener('click', async () => {
+      scanAllBtn.disabled = true;
+      scanAllBtn.textContent = 'Auditing ledger…';
+      await loadAndScanTransactions();
+      scanAllBtn.textContent = '✓ Scan complete';
+      window.setTimeout(() => { scanAllBtn.textContent = '🤖 AI scan account transactions'; scanAllBtn.disabled = false; }, 2000);
+    });
+  }
+}
+
 (async function initialize() {
   setupAuthForms(); setupLogout(); setupChat(); setupPredictionForms(); setupLoanApplication();
+  await setupLoanEligibilityPage(); await setupFraudDetectionPage();
   const user = await setupProtectedPage();
   if (user) { await setupCustomerPages(user); await setupApplicationDetails(); await setupPortfolio(); await setupBankingPages(); }
 })();

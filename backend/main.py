@@ -143,6 +143,110 @@ def fraud_prediction(request: FraudTransaction, user: dict[str, str] = Depends(g
     return predict_fraud(_require_model(getattr(app.state, "fraud_pipeline", None), "Fraud"), request.model_dump())
 
 
+@app.get("/api/agent/loan-profile")
+def get_agent_loan_profile(user: dict[str, str] = Depends(get_current_user)) -> dict[str, Any]:
+    """Provide customer profile pre-filled defaults for loan eligibility evaluation."""
+    try:
+        from .banking import ACCOUNTS, CREDIT
+    except ImportError:
+        from banking import ACCOUNTS, CREDIT
+
+    account = next((r for r in ACCOUNTS.read() if r.get("user_id") == user["user_id"]), {})
+    credit = next((r for r in CREDIT.read() if r.get("user_id") == user["user_id"]), {})
+    annual_income = float(account.get("annual_income") or 600000.0)
+    experience = float(account.get("employment_experience") or 3.0)
+    employment = account.get("employment_type") or "Salaried"
+    score = int(credit.get("score") or 750)
+    monthly_debt = float(account.get("monthly_emi") or credit.get("monthly_emi") or 0.0)
+    existing_loans = sum(float(l.get("outstanding_amount", 0.0)) for l in account.get("existing_loans", []))
+    return {
+        "age": 30,
+        "applicant_name": user.get("name", "Applicant"),
+        "annual_income": annual_income,
+        "employment_type": employment,
+        "employment_experience": experience,
+        "credit_score": score,
+        "existing_loan_amount": existing_loans,
+        "monthly_debt": monthly_debt,
+        "requested_loan_amount": 500000.0,
+    }
+
+
+@app.get("/api/agent/scan-transactions-fraud")
+@app.post("/api/agent/scan-transactions-fraud")
+def scan_transactions_fraud(user: dict[str, str] = Depends(get_current_user)) -> dict[str, Any]:
+    """Scan authenticated customer transactions with the fraud detection ML model."""
+    try:
+        from .banking import ACCOUNTS, TRANSACTIONS, ALERTS
+    except ImportError:
+        from banking import ACCOUNTS, TRANSACTIONS, ALERTS
+
+    account = next((r for r in ACCOUNTS.read() if r.get("user_id") == user["user_id"]), None)
+    if not account:
+        return {"transactions": [], "alerts": [], "summary": "No transactions found"}
+
+    user_tx = [t for t in TRANSACTIONS.read() if t.get("account_id") == account["account_id"]]
+    user_alerts = [a for a in ALERTS.read() if a.get("account_id") == account["account_id"]]
+    fraud_model = getattr(app.state, "fraud_pipeline", None)
+
+    scanned = []
+    for tx in user_tx[:30]:
+        time_str = tx.get("time", "12:00:00")
+        hour = int(time_str.split(":")[0]) if ":" in time_str else 12
+        channel_raw = tx.get("channel", "Online")
+        channel = "Online" if channel_raw in ["Online", "UPI"] else "In Person" if channel_raw == "Card" else "ATM" if channel_raw == "ATM" else "Mobile"
+        cat_raw = tx.get("merchant_category", "Other")
+        cat = cat_raw if cat_raw in ["Retail", "Groceries", "Travel", "Dining", "Electronics", "Other"] else "Other"
+        tx_type_raw = tx.get("transaction_type", "Purchase")
+        tx_type = "Cash Withdrawal" if "cash" in tx.get("description", "").lower() or tx_type_raw == "Cash Withdrawal" else "Transfer" if tx_type_raw == "Credit" or "transfer" in tx.get("description", "").lower() else "Online Payment" if channel in ["Online", "Mobile"] else "Purchase"
+        amount = float(tx.get("amount", 0))
+
+        payload = {
+            "transaction_amount": max(1.0, amount),
+            "transaction_hour": hour,
+            "transaction_type": tx_type,
+            "merchant_category": cat,
+            "transactions_last_24_hours": 2,
+            "distance_from_usual_location_km": 15.0 if amount < 50000 else 650.0,
+            "international_transaction": bool(amount > 100000 or "intl" in tx.get("description", "").lower()),
+            "transaction_channel": channel,
+        }
+        risk_result = {"prediction": "Normal", "risk_level": "Low", "fraud_probability": 0.05, "main_suspicious_characteristics": ["Normal domestic transaction"], "recommendation": "Normal transaction."}
+        if fraud_model is not None:
+            try:
+                risk_result = predict_fraud(fraud_model, payload)
+            except Exception:
+                pass
+
+        scanned.append({
+            "transaction_id": tx.get("transaction_id"),
+            "date": tx.get("date"),
+            "time": tx.get("time"),
+            "description": tx.get("description"),
+            "amount": amount,
+            "merchant_category": cat_raw,
+            "channel": channel_raw,
+            "risk_level": risk_result.get("risk_level", "Low"),
+            "prediction": risk_result.get("prediction", "Normal"),
+            "fraud_probability": risk_result.get("fraud_probability", 0.0),
+            "characteristics": risk_result.get("main_suspicious_characteristics", []),
+            "recommendation": risk_result.get("recommendation", ""),
+        })
+
+    high_risk_count = sum(1 for t in scanned if t["risk_level"] == "High")
+    medium_risk_count = sum(1 for t in scanned if t["risk_level"] == "Medium")
+    status_label = "Attention Required" if (high_risk_count > 0 or user_alerts) else "Moderate Vigilance" if medium_risk_count > 0 else "Secure"
+
+    return {
+        "transactions": scanned,
+        "total_scanned": len(scanned),
+        "high_risk_count": high_risk_count,
+        "medium_risk_count": medium_risk_count,
+        "alerts": user_alerts,
+        "account_security_status": status_label,
+    }
+
+
 def _build_customer_context(user: dict[str, str]) -> str:
     """Safely compile authenticated customer financial records for grounded BFSI advisory."""
     context_lines = [
