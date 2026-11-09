@@ -15,5 +15,3 @@ seaborn>=0.13,<1.0
 google-genai>=1.0,<3.0
 python-multipart>=0.0.9
 pypdf>=5.0
-streamlit>=1.35.0
-markdown>=3.6

@@ -46,25 +46,6 @@ For subsequent runs, activate `.venv` and run only:
 uvicorn backend.main:app --reload
 ```
 
-## Streamlit Hosting & Deployment
-
-You can host and run the SmartBank BFSI AI Assistant directly via Streamlit:
-
-```bash
-streamlit run app.py
-```
-Or on Windows, double-click `run_streamlit.bat`.
-
-### Deploying to Streamlit Community Cloud:
-1. Push this repository to GitHub.
-2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io).
-3. Select this repository, branch `main`, and set the main file path to `app.py`.
-4. In **Settings > Secrets**, add your Gemini API Key:
-   ```toml
-   GEMINI_API_KEY = "your-api-key-here"
-   ```
-5. Click **Deploy**. Your assistant will be live and accessible to users worldwide with full RAG document analysis!
-
 ## 3. Demo login
 
 | Role | Email | Password |
@@ -109,11 +90,8 @@ smartbank-ai/
 │   │   └── user_documents/   # Isolated per-user uploaded documents (RAG indexed)
 │   ├── models/               # Pre-trained ML pipelines
 │   └── training/             # Reproducible model training and datasets
-├── app.py                    # Streamlit BFSI Assistant matching FastAPI UI
-├── streamlit_app.py          # Streamlit Community Cloud entrypoint
-├── run_streamlit.bat         # 1-click Windows launcher for Streamlit
 ├── .env.example              # Safe configuration template
-├── requirements.txt          # Python dependencies (FastAPI + Streamlit + RAG + Gemini)
+├── requirements.txt          # Python dependencies (FastAPI + RAG + Gemini)
 └── README.md                 # Setup and usage guide
 ```
 
