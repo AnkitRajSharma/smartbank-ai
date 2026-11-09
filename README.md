@@ -89,23 +89,32 @@ Install the optional SDK with `pip install -r requirements-gemini.txt`, then ope
 ```text
 smartbank-ai/
 ├── frontend/                 # HTML pages, CSS and browser JavaScript
+│   ├── index.html            # Unified BFSI Banking Assistant UI
+│   ├── dashboard.html        # Customer banking overview & cards
+│   ├── style.css             # Cohesive styling & design system
+│   └── script.js             # Client API integration & RAG upload
 ├── backend/
 │   ├── main.py               # FastAPI entry point and API routes
 │   ├── auth.py               # Registration, login and logout
 │   ├── banking.py            # Account and transaction APIs
-│   ├── chatbot.py             # Assistant and Gemini integration
-│   ├── rag_service.py         # Local retrieval over banking guidance
+│   ├── chatbot.py            # Senior BFSI Advisory Specialist & Gemini LLM
+│   ├── rag_service.py        # Local & user document RAG retrieval engine
 │   ├── applications.py       # Loan application APIs
 │   ├── portfolio.py          # Admin analytics APIs
-│   ├── schemas.py             # Request validation
-│   ├── security.py            # Password hashing and JWT sessions
-│   ├── json_store.py          # JSON persistence
-│   ├── data/                  # Demo JSON records
-│   ├── models/                # Pre-trained ML pipelines
-│   └── training/              # Reproducible model training and datasets
-├── .env.example               # Safe configuration template
-├── requirements.txt           # Python dependencies
-└── README.md                  # Setup and usage guide
+│   ├── schemas.py            # Request validation
+│   ├── security.py           # Password hashing and JWT sessions
+│   ├── json_store.py         # JSON persistence
+│   ├── data/
+│   │   ├── knowledge_base/   # Comprehensive BFSI Advisory Markdown documents
+│   │   └── user_documents/   # Isolated per-user uploaded documents (RAG indexed)
+│   ├── models/               # Pre-trained ML pipelines
+│   └── training/             # Reproducible model training and datasets
+├── app.py                    # Streamlit BFSI Assistant matching FastAPI UI
+├── streamlit_app.py          # Streamlit Community Cloud entrypoint
+├── run_streamlit.bat         # 1-click Windows launcher for Streamlit
+├── .env.example              # Safe configuration template
+├── requirements.txt          # Python dependencies (FastAPI + Streamlit + RAG + Gemini)
+└── README.md                 # Setup and usage guide
 ```
 
 ## 6. Model training (optional)
