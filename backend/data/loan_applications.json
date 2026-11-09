@@ -169,5 +169,43 @@
     "prediction": "Eligible",
     "application_status": "Under Review",
     "application_date": "2026-11-06T19:49:06+00:00"
+  },
+  {
+    "application_id": "SB-5B37AC965CBB",
+    "user_id": "SB10003",
+    "applicant_name": "Rahul Mehta",
+    "age": 25,
+    "annual_income": 100000.0,
+    "employment_type": "Self-employed",
+    "employment_experience": 2.0,
+    "credit_score": 700,
+    "existing_loan_amount": 60000.0,
+    "monthly_debt": 20000.0,
+    "requested_loan_amount": 500000.0,
+    "loan_probability": 0.185,
+    "risk_score": 81.5,
+    "risk_category": "High",
+    "prediction": "Not Eligible",
+    "application_status": "Under Review",
+    "application_date": "2026-11-09T14:00:04+00:00"
+  },
+  {
+    "application_id": "SB-EFFF2EE0FB79",
+    "user_id": "SB10003",
+    "applicant_name": "Rahul Mehta",
+    "age": 25,
+    "annual_income": 700000.0,
+    "employment_type": "Salaried",
+    "employment_experience": 1.0,
+    "credit_score": 750,
+    "existing_loan_amount": 0.0,
+    "monthly_debt": 0.0,
+    "requested_loan_amount": 100000.0,
+    "loan_probability": 0.9089,
+    "risk_score": 9.1,
+    "risk_category": "Low",
+    "prediction": "Eligible",
+    "application_status": "Under Review",
+    "application_date": "2026-11-09T14:00:57+00:00"
   }
 ]

@@ -9,103 +9,84 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-protected="true">
-  <main class="page-shell">
-    <section class="chat-card" aria-label="SmartBank AI chat">
-      <header class="chat-header">
-        <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" role="img"><path d="M4 12h24L16 5 4 12Zm3 3v9m6-9v9m6-9v9m6-9v9M4 27h24" /></svg>
-        </div>
-        <div class="brand-copy">
-          <h1>SmartBank AI</h1>
-          <p>Your Personal Banking Assistant</p>
-        </div>
-        <a class="chat-dashboard-link" href="dashboard.html">Dashboard</a>
-        <button class="clear-button" id="clear-chat" type="button" aria-label="Clear chat" title="Clear chat">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 14h10l1-14M9 7V4h6v3" /></svg>
-          <span>Clear chat</span>
-        </button>
-      </header>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand-lockup" href="dashboard.html">
+        <span class="brand-mark">S</span>
+        <span><strong>SmartBank AI</strong><small>Personal banking</small></span>
+      </a>
+      <nav class="side-nav">
+        <a href="dashboard.html">Overview</a>
+        <a class="active" href="index.html">Banking assistant</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="credit.html">Credit profile</a>
+        <a href="analytics.html">Spending analytics</a>
+        <a href="apply-loan.html">Apply for a loan</a>
+        <a href="applications.html">My applications</a>
+        <a href="portfolio.html" data-admin-only hidden>Portfolio analytics</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+      <button class="logout-button" data-logout>Sign out</button>
+    </aside>
 
-      <div class="chat-content">
-        <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions">
-          <div class="message-row bot-row">
-            <div class="avatar bot-avatar" aria-hidden="true">S</div>
-            <div class="message-group">
-              <span class="sender-label">SmartBank Assistant</span>
-              <div class="message-bubble bot-bubble">
-                <p>Hi there! 👋 I’m here to help with everyday banking questions. What would you like to know?</p>
+    <main class="main-content assistant-main-content">
+      <section class="chat-card" aria-label="SmartBank AI chat">
+        <header class="chat-header">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" role="img"><path d="M4 12h24L16 5 4 12Zm3 3v9m6-9v9m6-9v9M4 27h24" /></svg>
+          </div>
+          <div class="brand-copy">
+            <h1>SmartBank AI</h1>
+            <p>Your Personal Banking Assistant</p>
+          </div>
+          <button class="clear-button" id="clear-chat" type="button" aria-label="Clear chat" title="Clear chat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 14h10l1-14M9 7V4h6v3" /></svg>
+            <span>Clear chat</span>
+          </button>
+        </header>
+
+        <div class="chat-content">
+          <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions">
+            <div class="message-row bot-row">
+              <div class="avatar bot-avatar" aria-hidden="true">S</div>
+              <div class="message-group">
+                <span class="sender-label">SmartBank Assistant</span>
+                <div class="message-bubble bot-bubble">
+                  <p>Hello! 👋 I am your <strong>SmartBank Pro BFSI Advisory Assistant</strong>. I can assist you with accounts, deposits, loan estimates, credit scores, insurance, wealth planning, and fraud protection. Use the <strong>Upload Doc</strong> button in the search bar below to analyze any statement or policy with RAG. How may I help you today?</p>
+                </div>
+                <time class="message-time">Just now</time>
               </div>
-              <time class="message-time">Just now</time>
             </div>
           </div>
         </div>
 
-        <aside class="prediction-tools" aria-label="Experimental prediction tools">
-          <button class="tool-card" type="button" data-open-dialog="loan-dialog"><span class="tool-icon" aria-hidden="true">↗</span><span><strong>Loan Eligibility</strong><small>Get an experimental estimate</small></span><span class="tool-arrow" aria-hidden="true">›</span></button>
-          <button class="tool-card" type="button" data-open-dialog="fraud-dialog"><span class="tool-icon fraud-icon" aria-hidden="true">⌁</span><span><strong>Fraud Detection</strong><small>Review transaction risk</small></span><span class="tool-arrow" aria-hidden="true">›</span></button>
-        </aside>
+        <div id="uploaded-doc-bar" class="uploaded-doc-bar" hidden>
+          <span class="uploaded-doc-icon">📄</span>
+          <span id="uploaded-doc-label" class="uploaded-doc-label"></span>
+          <span class="uploaded-doc-tag">RAG Indexed</span>
+          <button type="button" id="clear-uploaded-doc" class="clear-doc-btn" title="Remove document">×</button>
+        </div>
 
-        <aside class="suggestions" aria-label="Suggested questions">
-          <p class="suggestions-label">QUICK QUESTIONS</p>
-          <div class="suggestion-list">
-            <button class="suggestion-chip" type="button">How can I apply for a loan?</button>
-            <button class="suggestion-chip" type="button">What is a credit score?</button>
-            <button class="suggestion-chip" type="button">How can I block my debit card?</button>
-          </div>
-        </aside>
-      </div>
+        <form class="composer" id="chat-form">
+          <label class="attach-button" for="doc-upload-input" title="Upload document for RAG analysis (PDF, TXT, MD, CSV)">
+            <input id="doc-upload-input" type="file" accept=".pdf,.txt,.md,.csv,.tsv,.json" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+            </svg>
+            <span class="attach-text">Upload Doc</span>
+          </label>
+          <label class="visually-hidden" for="message-input">Type your banking question</label>
+          <input id="message-input" name="message" type="text" placeholder="Type your banking question or ask about uploaded documents..." autocomplete="off" maxlength="500">
+          <button class="send-button" type="submit" aria-label="Send message">
+            <span>Send</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-7.2 18-3.8-7-7-3.8L21 3Zm0 0L10 14" /></svg>
+          </button>
+        </form>
+        <footer class="chat-footer"><span class="status-dot"></span> SmartBank AI can make mistakes. Never share your PIN or password.</footer>
+      </section>
+    </main>
+  </div>
 
-      <form class="composer" id="chat-form">
-        <label class="visually-hidden" for="message-input">Type your banking question</label>
-        <input id="message-input" name="message" type="text" placeholder="Type your question here..." autocomplete="off" maxlength="500">
-        <button class="send-button" type="submit" aria-label="Send message">
-          <span>Send</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-7.2 18-3.8-7-7-3.8L21 3Zm0 0L10 14" /></svg>
-        </button>
-      </form>
-      <footer class="chat-footer"><span class="status-dot"></span> SmartBank AI can make mistakes. Never share your PIN or password.</footer>
-    </section>
-  </main>
-
-  <dialog class="prediction-dialog" id="loan-dialog" aria-labelledby="loan-title">
-    <div class="dialog-header">
-      <div><p class="dialog-eyebrow">EXPERIMENTAL ESTIMATE</p><h2 id="loan-title">Loan eligibility</h2></div>
-      <button class="dialog-close" type="button" data-close-dialog aria-label="Close loan form">×</button>
-    </div>
-    <p class="dialog-intro">Enter the application details to receive an experimental model estimate. This is not a bank approval.</p>
-    <form class="prediction-form" id="loan-form">
-      <label>Age <input name="age" type="number" min="18" max="100" required></label>
-      <label>Annual income (₹) <input name="annual_income" type="number" min="1" step="0.01" required></label>
-      <label>Employment type <select name="employment_type" required><option value="">Choose one</option><option>Salaried</option><option>Self-employed</option><option>Contract</option></select></label>
-      <label>Employment experience (years) <input name="employment_experience" type="number" min="0" max="80" step="0.1" required></label>
-      <label>Credit score <input name="credit_score" type="number" min="300" max="900" required></label>
-      <label>Existing loan amount (₹) <input name="existing_loan_amount" type="number" min="0" step="0.01" required></label>
-      <label>Monthly debt / EMI total (₹) <input name="monthly_debt" type="number" min="0" step="0.01" required></label>
-      <label>Requested loan amount (₹) <input name="requested_loan_amount" type="number" min="1" step="0.01" required></label>
-      <button class="form-submit" type="submit">Get estimate</button>
-    </form>
-    <div class="prediction-result" id="loan-result" aria-live="polite"></div>
-  </dialog>
-
-  <dialog class="prediction-dialog" id="fraud-dialog" aria-labelledby="fraud-title">
-    <div class="dialog-header">
-      <div><p class="dialog-eyebrow">EXPERIMENTAL RISK CHECK</p><h2 id="fraud-title">Fraud detection</h2></div>
-      <button class="dialog-close" type="button" data-close-dialog aria-label="Close fraud form">×</button>
-    </div>
-    <p class="dialog-intro">Check a transaction for risk signals. A high risk result recommends verification and never blocks a transaction.</p>
-    <form class="prediction-form" id="fraud-form">
-      <label>Transaction amount (₹) <input name="transaction_amount" type="number" min="0.01" step="0.01" required></label>
-      <label>Transaction hour <input name="transaction_hour" type="number" min="0" max="23" required></label>
-      <label>Transaction type <select name="transaction_type" required><option value="">Choose one</option><option>Purchase</option><option>Cash Withdrawal</option><option>Transfer</option><option>Online Payment</option></select></label>
-      <label>Merchant category <select name="merchant_category" required><option value="">Choose one</option><option>Retail</option><option>Groceries</option><option>Travel</option><option>Dining</option><option>Electronics</option><option>Other</option></select></label>
-      <label>Transactions in last 24 hours <input name="transactions_last_24_hours" type="number" min="0" required></label>
-      <label>Distance from usual location (km) <input name="distance_from_usual_location_km" type="number" min="0" step="0.1" required></label>
-      <label>International transaction <select name="international_transaction" required><option value="">Choose one</option><option value="true">Yes</option><option value="false">No</option></select></label>
-      <label>Transaction channel <select name="transaction_channel" required><option value="">Choose one</option><option>In Person</option><option>Online</option><option>Mobile</option><option>ATM</option></select></label>
-      <button class="form-submit" type="submit">Check risk</button>
-    </form>
-    <div class="prediction-result" id="fraud-result" aria-live="polite"></div>
-  </dialog>
   <script src="script.js"></script>
 </body>
 </html>

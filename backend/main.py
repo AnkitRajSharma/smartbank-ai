@@ -13,7 +13,7 @@ try:
 except ImportError:
     pass
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, ValidationError, field_validator
@@ -146,6 +146,59 @@ def fraud_prediction(request: FraudTransaction, user: dict[str, str] = Depends(g
     return predict_fraud(_require_model(getattr(app.state, "fraud_pipeline", None), "Fraud"), request.model_dump())
 
 
+def _build_customer_context(user: dict[str, str]) -> str:
+    """Safely compile authenticated customer financial records for grounded BFSI advisory."""
+    context_lines = [
+        f"Customer Name: {user.get('name', 'Valued Customer')}",
+        f"Customer Email: {user.get('email', '')}",
+        f"User ID: {user.get('user_id', '')}",
+        f"Role: {user.get('role', 'customer')}",
+    ]
+    try:
+        try:
+            from .banking import ACCOUNTS, CREDIT, transaction_analytics
+        except ImportError:
+            from banking import ACCOUNTS, CREDIT, transaction_analytics
+
+        try:
+            account = next((row for row in ACCOUNTS.read() if row.get("user_id") == user["user_id"]), None)
+            if account:
+                context_lines.append(
+                    f"Account Details: {account.get('account_type', 'Savings')} Account ({account.get('masked_account_number')}) | "
+                    f"Available Balance: ₹{float(account.get('available_balance', 0)):,.2f} | "
+                    f"Annual Income: ₹{float(account.get('annual_income', 0)):,.0f} | "
+                    f"Employment: {account.get('employment_type', 'Not specified')}"
+                )
+        except Exception:
+            pass
+
+        try:
+            profile = next((item for item in CREDIT.read() if item.get("user_id") == user["user_id"]), None)
+            if profile:
+                context_lines.append(
+                    f"Credit Profile: Score {profile.get('score')} ({profile.get('category')}) | "
+                    f"Credit Utilization: {profile.get('utilization_percent')}% | "
+                    f"Debt-to-Income (DTI): {float(profile.get('debt_to_income_ratio', 0)):.1%}"
+                )
+        except Exception:
+            pass
+
+        try:
+            analytics = transaction_analytics(user)
+            if analytics:
+                context_lines.append(
+                    f"Spending Analytics: Total Inflow/Income: ₹{analytics.get('total_income', 0):,.2f} | "
+                    f"Total Outflow/Expenditure: ₹{analytics.get('total_expenditure', 0):,.2f} | "
+                    f"Net Savings: ₹{analytics.get('net_savings', 0):,.2f}"
+                )
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+    return "\n".join(context_lines)
+
+
 @app.post("/api/agent/chat", response_model=ChatResponse)
 @app.post("/api/chat", response_model=ChatResponse)
 def chat(
@@ -169,33 +222,15 @@ def chat(
             raise ValueError("Please check the transaction details and allowed category values") from error
         return predict_fraud(_require_model(fraud_model, "Fraud"), clean)
 
-    normalized = request.message.lower()
-    # Safe, read-only tools are allowlisted and scoped to the authenticated customer's records.
-    if any(term in normalized for term in ("my balance", "account balance", "how much do i have")):
-        try: from .banking import ACCOUNTS
-        except ImportError: from banking import ACCOUNTS
-        account = next((row for row in ACCOUNTS.read() if row.get("user_id") == user["user_id"]), None)
-        response = (f"Your available synthetic demo balance is ₹{account['available_balance']:,.0f} "
-                    f"(account {account['masked_account_number']})." if account else "No demo account is linked to this profile.")
-    elif any(term in normalized for term in ("my spending", "my expenses", "spending summary")):
-        try: from .banking import transaction_analytics
-        except ImportError: from banking import transaction_analytics
-        summary = transaction_analytics(user)
-        response = f"Across the synthetic transaction history, income is ₹{summary['total_income']:,.0f}, expenditure is ₹{summary['total_expenditure']:,.0f}, and net savings are ₹{summary['net_savings']:,.0f}."
-    elif any(term in normalized for term in ("my credit score", "my credit profile", "my credit")):
-        try: from .banking import CREDIT
-        except ImportError: from banking import CREDIT
-        profile = next((item for item in CREDIT.read() if item.get("user_id") == user["user_id"]), None)
-        response = (f"Your illustrative synthetic demo score is {profile['score']} ({profile['category']}). "
-                    f"Utilization is {profile['utilization_percent']}% and the demo debt-to-income ratio is {profile['debt_to_income_ratio']:.1%}. "
-                    "This is not a credit bureau score or lending decision." if profile else "No demo credit profile is linked to this account.")
-    else:
-        response = chatbot.respond(
-        request.message,
-        f"{user['user_id']}:{request.session_id or 'default'}",
-        validated_loan if loan_model is not None else None,
-        validated_fraud if fraud_model is not None else None,
-        )
+    customer_context = _build_customer_context(user)
+    response = chatbot.respond(
+        message=request.message,
+        session_id=f"{user['user_id']}:{request.session_id or 'default'}",
+        loan_predictor=validated_loan if loan_model is not None else None,
+        fraud_predictor=validated_fraud if fraud_model is not None else None,
+        customer_context=customer_context,
+        user_id=user["user_id"],
+    )
     try:
         CONVERSATIONS.append({"user_id": user["user_id"], "session_id": request.session_id or "default",
                               "timestamp": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(timespec="seconds"),
@@ -203,6 +238,62 @@ def chat(
     except RuntimeError:
         logger.warning("Conversation history could not be saved")
     return ChatResponse(user_message=request.message, bot_response=response, status="success")
+
+
+@app.post("/api/rag/upload")
+async def upload_rag_document(
+    file: UploadFile = File(...),
+    user: dict[str, str] = Depends(get_current_user),
+) -> dict[str, Any]:
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="Filename cannot be empty")
+    allowed_exts = {".pdf", ".txt", ".md", ".csv", ".tsv", ".json", ".doc", ".docx"}
+    ext = Path(file.filename).suffix.lower()
+    if ext not in allowed_exts:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported file format '{ext}'. Allowed formats: PDF, TXT, MD, CSV, TSV, JSON."
+        )
+    content = await file.read()
+    if len(content) > 15 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="Document exceeds maximum allowed size of 15 MB")
+    if not content:
+        raise HTTPException(status_code=400, detail="Uploaded file is empty")
+
+    try:
+        from .rag_service import save_user_document
+    except ImportError:
+        from rag_service import save_user_document
+
+    try:
+        safe_name, chunk_count = save_user_document(user["user_id"], file.filename, content)
+        return {
+            "status": "success",
+            "filename": safe_name,
+            "chunks_count": chunk_count,
+            "message": f"Successfully indexed '{safe_name}' ({chunk_count} sections) into your RAG session."
+        }
+    except Exception as e:
+        raise HTTPException(status_code=422, detail=f"Failed to process document: {e}") from e
+
+
+@app.get("/api/rag/documents")
+def get_rag_documents(user: dict[str, str] = Depends(get_current_user)) -> dict[str, Any]:
+    try:
+        from .rag_service import list_user_documents
+    except ImportError:
+        from rag_service import list_user_documents
+    return {"documents": list_user_documents(user["user_id"])}
+
+
+@app.delete("/api/rag/documents/{filename}")
+def remove_rag_document(filename: str, user: dict[str, str] = Depends(get_current_user)) -> dict[str, Any]:
+    try:
+        from .rag_service import clear_user_documents
+    except ImportError:
+        from rag_service import clear_user_documents
+    cleared = clear_user_documents(user["user_id"], filename)
+    return {"status": "cleared" if cleared else "not_found", "filename": filename}
 
 
 @app.delete("/api/chat/session/{session_id}")

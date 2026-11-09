@@ -322,6 +322,108 @@ body:has(.app-shell) { background: #f6f8fa; }
 
 .filter-row { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px; }
 .filter-row input, .filter-row select { min-height:40px; padding:8px 11px; border:1px solid #dce5ea; border-radius:9px; color:var(--ink); background:#fff; }
+
+/* Assistant in App-Shell Layout */
+.assistant-main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px clamp(14px, 2.5vw, 36px);
+  min-height: 100vh;
+}
+.assistant-main-content .chat-card {
+  width: 100%;
+  max-width: 920px;
+  height: calc(100vh - 48px);
+  min-height: 560px;
+  margin: 0;
+}
+
+/* Document Upload in Chat */
+.attach-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid #dfe7ec;
+  border-radius: 11px;
+  color: #334e68;
+  background: #f8fafc;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .18s ease;
+}
+.attach-button:hover {
+  border-color: #59bbaa;
+  color: #087d76;
+  background: #edf8f5;
+}
+.attach-button svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.attach-text {
+  font-size: 12px;
+  font-weight: 600;
+}
+.upload-icon {
+  color: #0d7f57;
+  background: #def7ee;
+}
+.prediction-tools {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.uploaded-doc-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 24px;
+  background: #edf7f4;
+  border-top: 1px solid #d4ece5;
+  font-size: 11px;
+  color: #12574e;
+}
+.uploaded-doc-bar .uploaded-doc-icon {
+  font-size: 13px;
+}
+.uploaded-doc-bar .uploaded-doc-label {
+  font-weight: 600;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.uploaded-doc-bar .uploaded-doc-tag {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #cbf1e6;
+  color: #0b6858;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.uploaded-doc-bar .clear-doc-btn {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: #0b6858;
+  font-size: 17px;
+  line-height: 1;
+  padding: 0 4px;
+  cursor: pointer;
+}
+.uploaded-doc-bar .clear-doc-btn:hover {
+  color: #a63434;
+}
 .filter-row input { flex:1 1 190px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }

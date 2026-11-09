@@ -6,4 +6,5 @@ venv/
 .env
 backend/data/*.lock
 backend/data/*.tmp
+backend/data/user_documents/
 backend/training/reports/

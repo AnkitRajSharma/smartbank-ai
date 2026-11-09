@@ -12,7 +12,7 @@ async function api(path, options = {}) {
     response = await fetch(`${API_BASE_URL}${path}`, {
       ...options,
       credentials: 'include',
-      headers: { ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...options.headers },
+      headers: { ...(options.body && !(options.body instanceof FormData) ? { 'Content-Type': 'application/json' } : {}), ...options.headers },
     });
   } catch (_) {
     throw new Error(`Can't reach SmartBank's API at ${API_BASE_URL}. Start it from the project folder with: uvicorn backend.main:app --reload. Open this page through Live Server, not as a file.`);
@@ -50,7 +50,7 @@ async function setupAuthForms() {
     messageFor(target, 'Signing you in…');
     try {
       await api('/api/auth/login', { method: 'POST', body: JSON.stringify(formPayload(login)) });
-      window.location.href = new URLSearchParams(window.location.search).get('next') || 'dashboard.html';
+      window.location.href = 'dashboard.html';
     } catch (error) { messageFor(target, error.message); }
     finally { button.disabled = false; }
   });
@@ -288,13 +288,28 @@ function setupChat() {
   let pending = false;
   let sessionId = window.crypto?.randomUUID?.() || `session-${Date.now()}`;
   const scroll = () => { chatMessages.scrollTop = chatMessages.scrollHeight; };
+  function renderMarkdown(md) {
+    if (!md) return '';
+    let html = escapeHTML(md);
+    html = html.replace(/^### (.*$)/gim, '<h4 style="margin: 8px 0 4px; color: var(--navy); font-size: 13px;">$1</h4>');
+    html = html.replace(/^## (.*$)/gim, '<h3 style="margin: 10px 0 4px; color: var(--navy); font-size: 14px;">$1</h3>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    html = html.replace(/^[\*\-]\s+(.*)$/gim, '<span style="display:block; padding-left: 8px;">• $1</span>');
+    html = html.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+    return html;
+  }
   function display(text, sender) {
     const row = document.createElement('div'); row.className = `message-row ${sender === 'user' ? 'user-row' : 'bot-row'}`;
     const avatar = document.createElement('div'); avatar.className = `avatar ${sender === 'user' ? 'user-avatar' : 'bot-avatar'}`; avatar.textContent = sender === 'user' ? 'Y' : 'S';
     const group = document.createElement('div'); group.className = 'message-group';
     const label = document.createElement('span'); label.className = 'sender-label'; label.textContent = sender === 'user' ? 'You' : 'SmartBank Assistant';
     const bubble = document.createElement('div'); bubble.className = `message-bubble ${sender === 'user' ? 'user-bubble' : 'bot-bubble'}`;
-    const paragraph = document.createElement('p'); paragraph.textContent = text; bubble.appendChild(paragraph);
+    if (sender === 'user') {
+      const paragraph = document.createElement('p'); paragraph.textContent = text; bubble.appendChild(paragraph);
+    } else {
+      bubble.innerHTML = renderMarkdown(text);
+    }
     group.append(label, bubble); row.append(avatar, group); chatMessages.appendChild(row); scroll();
   }
   chatForm.addEventListener('submit', async (event) => {
@@ -311,6 +326,71 @@ function setupChat() {
     try { await api(`/api/chat/session/${encodeURIComponent(old)}`, { method: 'DELETE' }); } catch (_) { /* Nothing to clear on server. */ }
     chatMessages.innerHTML = initialWelcome; scroll(); messageInput.focus();
   });
+  const docUploadInput = document.getElementById('doc-upload-input');
+  const toolUploadBtn = document.getElementById('tool-upload-doc');
+  const uploadedDocBar = document.getElementById('uploaded-doc-bar');
+  const uploadedDocLabel = document.getElementById('uploaded-doc-label');
+  const clearDocBtn = document.getElementById('clear-uploaded-doc');
+
+  toolUploadBtn?.addEventListener('click', () => docUploadInput?.click());
+
+  // Check active indexed user documents on load
+  (async () => {
+    try {
+      const { documents } = await api('/api/rag/documents');
+      if (documents && documents.length > 0) {
+        const latest = documents[documents.length - 1];
+        if (uploadedDocBar && uploadedDocLabel) {
+          uploadedDocBar.hidden = false;
+          uploadedDocLabel.textContent = latest.filename;
+        }
+      }
+    } catch (_) {}
+  })();
+
+  docUploadInput?.addEventListener('change', async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const loading = document.createElement('div');
+    loading.className = 'message-row bot-row';
+    loading.textContent = `Processing and indexing '${file.name}' into RAG knowledge base…`;
+    chatMessages.appendChild(loading);
+    scroll();
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await api('/api/rag/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      loading.remove();
+      if (uploadedDocBar && uploadedDocLabel) {
+        uploadedDocBar.hidden = false;
+        uploadedDocLabel.textContent = res.filename;
+      }
+      display(`📄 Successfully uploaded and indexed **${res.filename}** (${res.chunks_count} sections) into your RAG assistant. You can now ask any questions about this document!`, 'bot');
+    } catch (error) {
+      loading.remove();
+      display(`❌ Document upload failed: ${error.message}`, 'bot');
+    } finally {
+      docUploadInput.value = '';
+    }
+  });
+
+  clearDocBtn?.addEventListener('click', async () => {
+    const currentName = uploadedDocLabel?.textContent;
+    if (uploadedDocBar) uploadedDocBar.hidden = true;
+    if (currentName) {
+      try {
+        await api(`/api/rag/documents/${encodeURIComponent(currentName)}`, { method: 'DELETE' });
+        display(`Document **${currentName}** has been removed from active RAG indexing.`, 'bot');
+      } catch (_) {}
+    }
+  });
+
   document.querySelectorAll('.suggestion-chip').forEach((button) => button.addEventListener('click', () => { messageInput.value = button.textContent; chatForm.requestSubmit(); }));
   document.querySelectorAll('[data-open-dialog]').forEach((button) => button.addEventListener('click', () => document.getElementById(button.dataset.openDialog)?.showModal()));
   document.querySelectorAll('[data-close-dialog]').forEach((button) => button.addEventListener('click', () => button.closest('dialog')?.close()));

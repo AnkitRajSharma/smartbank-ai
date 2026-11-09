@@ -145,8 +145,11 @@ def rag_query(payload: dict[str, str], user: dict[str, str] = Depends(get_curren
     question = payload.get("query", "").strip()
     if not question: raise HTTPException(422, "query is required")
     docs = retrieve(question)
-    context = "\n".join(f"[{d['title']}] {d['text']}" for d in docs)
-    answer = gemini_answer(question, context) if docs else None
+    from .rag_service import format_rag_context
+    context = format_rag_context(docs)
+    account = next((row for row in ACCOUNTS.read() if row.get("user_id") == user["user_id"]), None)
+    cust_ctx = f"Customer: {user.get('name', '')} | Available Balance: ₹{account.get('available_balance', 0):,.2f}" if account else ""
+    answer = gemini_answer(question, knowledge_context=context, customer_context=cust_ctx) if docs else None
     return {"answer": answer or get_bot_response(question), "sources": [{"title": d["title"], "reference": d["source"], "relevance": d["score"]} for d in docs], "mode": "gemini_rag" if answer else "local_retrieval_faq"}
 
 @router.get("/api/rag/sources")

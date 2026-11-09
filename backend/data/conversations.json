@@ -495,5 +495,96 @@
     "timestamp": "2026-11-06T19:56:48+00:00",
     "user_message": "How can I apply for a loan?",
     "assistant_message": "To apply for a loan, compare lender options, check eligibility criteria, and submit an application with requested identity, address, and income documents. You can use the Loan Eligibility form for an experimental estimate."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-09T12:59:40+00:00",
+    "user_message": "What are your Fixed Deposit rates for 2 years?",
+    "assistant_message": "Dear Aarav,\n\nThank you for reaching out to SmartBank. Below are the details regarding our Fixed Deposit (FD) interest rates for a 2-year tenure, along with key features to help you optimize your savings.\n\n---\n\n### Fixed Deposit Rates Overview\n\nFor a deposit tenure of **2 years**, SmartBank offers highly competitive interest rates with **quarterly compounding**:\n\n| Deposit Tenure | Regular Rate (p.a.) | Senior Citizen Rate (p.a.) |\n| :--- | :--- | :--- |\n| **1 Year to 2 Years** | **7.25%** | **7.75%** |\n| **Above 2 Years to 5 Years** | **7.40%** | **7.90%** |\n\n*Note: If you lock in your deposit for **exactly 2 years**, the applicable rate is **7.25% p.a.** If you choose a tenure slightly exceeding 2 years (e.g., 2 years and 1 day up to 5 years), the interest rate increases to **7.40% p.a.***\n\n---\n\n### Key Terms & Features\n\n* **Compounding Frequency:** Interest is compounded **quarterly**, maximizing your yield over the 2-year duration.\n* **Payout Options:** You can opt for cumulative reinvestment (interest paid at maturity) or periodic payouts (monthly or quarterly) depending on your cash flow needs.\n* **Premature Withdrawal:** Allowed with a nominal penalty ranging between **0.50% to 1.00%** on the rate applicable for the duration the deposit was actually held.\n* **Tax-Saver Option:** If you wish to claim tax deductions under **Section 80C** (up to ₹1,50,000 per financial year), SmartBank offers a **5-Year Tax Saver FD** at **7.40% p.a.** *(Lock-in period of 5 years applies; premature withdrawal is not permitted for Tax-Saver FDs).*\n\n---\n\n### SmartBank Personalized Recommendation\n\nWith your current **Savings Account balance of ₹148,250.00** and zero active debt obligations (DTI of 0.0%), placing a portion of your surplus funds into a 2-year FD is an excellent way to earn predictable, risk-free returns while keeping your core emergency reserve intact.\n\n**How to Book Online:**\n1. Log in to the SmartBank Mobile Banking App or NetBanking.\n2. Navigate to **Deposits & Investments** > **Open Fixed Deposit**.\n3. Select your desired tenure (**2 Years**) and payout preference.\n4. Confirm funding directly from your Savings Account (XXXX 1001).\n\nPlease let me know if you would like me to calculate projected maturity returns for a specific deposit amount!\n\n---\n*Disclaimer: Interest rates and terms are accurate as per current SmartBank policies. Fixed Deposit creation is subject to standard bank verification and terms.*"
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-09T12:59:51+00:00",
+    "user_message": "How is my credit score and what loan can I get with my current balance?",
+    "assistant_message": "Hello Mr. Aarav Sharma,\n\nThank you for reaching out to SmartBank Advisory Services. Based on your authenticated financial profile, here is an in-depth advisory evaluation of your credit health and loan eligibility.\n\n---\n\n### 1. Credit Profile Evaluation\n\nYour current credit score is **785**, which falls into the **Prime / Excellent (750–900)** tier. \n\n* **Credit Score:** 785 (Prime / Excellent)\n* **Credit Utilization Ratio:** 18% *(Excellent; well below the recommended 30% threshold)*\n* **Debt-to-Income (DTI) Ratio:** 0.0% *(Zero active debt obligations)*\n\n#### Key Benefits of Your Credit Profile:\n* **Preferential Interest Rates:** Qualification for the lowest standard interest rate brackets across unsecured and secured retail loan products.\n* **Processing Fee Waivers:** High likelihood of zero-to-discounted processing fee offers.\n* **Accelerated Approval:** Eligible for pre-approved loan offers with minimal documentation and fast-track underwriting.\n\n---\n\n### 2. Loan Eligibility & Product Options\n\nWith an **Annual Income of ₹9,00,000** (approx. **₹75,000/month**) and a **0.0% DTI**, your Fixed Obligation to Income Ratio (FOIR) borrowing capacity is at its maximum limit. Banks typically allow up to **50% of net monthly income** toward total loan EMIs, giving you a maximum monthly repayment capacity of **~₹37,500/month**.\n\nHere is an overview of the retail credit options available to you:\n\n| Loan Type | Starting Interest Rate (p.a.) | Max Estimated EMI Capacity | Key Highlights & Considerations |\n| :--- | :--- | :--- | :--- |\n| **Personal Loan** *(Unsecured)* | **10.49%** *(Reducing balance)* | ~₹37,500 / month | No collateral required; multi-purpose; flexible tenure (1–5 years). |\n| **Home Loan** *(Secured)* | **8.35%** *(Floating)* | ~₹37,500 / month | Long tenure (up to 30 yrs); tax benefits under Sec 24(b) & Sec 80C. |\n| **New Auto Loan** *(Secured)* | **8.65%** | ~₹37,5"
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "test-session-1",
+    "timestamp": "2026-11-09T13:00:05+00:00",
+    "user_message": "run loan prediction for me",
+    "assistant_message": "I can compute an experimental ML model estimate. Please provide these details: age; annual income; employment type (Salaried, Self-employed, or Contract); years of employment experience; credit score; existing loan amount; monthly debt or EMI total; requested loan amount. You can also open the matching form tool in the dashboard."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "test-session-1",
+    "timestamp": "2026-11-09T13:00:05+00:00",
+    "user_message": "age 35, annual income 900000, salaried, experience 8 years, credit score 785, existing loan 0, monthly debt 0, requested loan 500000",
+    "assistant_message": "That prediction model is not loaded yet. Please ensure the model artifacts are present."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "test-session-2",
+    "timestamp": "2026-11-09T13:00:13+00:00",
+    "user_message": "run loan prediction for me",
+    "assistant_message": "I can compute an experimental ML model estimate. Please provide these details: age; annual income; employment type (Salaried, Self-employed, or Contract); years of employment experience; credit score; existing loan amount; monthly debt or EMI total; requested loan amount. You can also open the matching form tool in the dashboard."
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "test-session-2",
+    "timestamp": "2026-11-09T13:00:13+00:00",
+    "user_message": "age 35, annual income 900000, salaried, experience 8 years, credit score 785, existing loan 0, monthly debt 0, requested loan 500000",
+    "assistant_message": "### Experimental Loan Model Estimate: Eligible\n- **Model Probability**: 94.3%\n- **Key Influencing Features**: annual_income, requested_loan_amount, credit_score\n\n> [!NOTE]\n> This is an experimental machine learning estimate and does not constitute a formal loan underwriting decision."
+  },
+  {
+    "user_id": "SB10002",
+    "session_id": "004d7f26-2a48-44cc-9349-176c7b50ad18",
+    "timestamp": "2026-11-09T13:08:40+00:00",
+    "user_message": "hi",
+    "assistant_message": "Hello Ms. Priya Verma! Welcome to SmartBank AI. \n\nAs your Digital Banking & Financial Advisory Specialist, I am here to assist you with a wide range of services, including:\n\n* **Everyday Banking & Wealth Management:** High-yield Savings (SmartSaver up to 6.5%), Fixed/Recurring Deposits, and SIP investments.\n* **Credit & Lending Solutions:** Checking loan eligibility (Personal, Home, SME), understanding interest rates, or strategies to boost your credit score (currently at 695).\n* **Insurance & Protection:** Comprehensive Health (SmartHealth Shield) and Term Life (SmartProtect) coverage tailored to your financial goals.\n* **Account & Digital Payment Services:** Guidance on UPI, NEFT/RTGS, cards, and secure transaction practices.\n\nHow can I help you today? Feel free to ask a specific question or explore options to optimize your savings and credit profile!"
+  },
+  {
+    "user_id": "SB10002",
+    "session_id": "004d7f26-2a48-44cc-9349-176c7b50ad18",
+    "timestamp": "2026-11-09T13:09:21+00:00",
+    "user_message": "can you check can i elegible for loan or not",
+    "assistant_message": "Dear Ms. Priya Verma,\n\nThank you for reaching out to SmartBank AI. Based on your financial profile and our current retail lending guidelines, here is a detailed **Loan Eligibility Assessment**.\n\n---\n\n### 1. Loan Eligibility Overview\n\n**Overall Assessment:** **Eligible (Moderate / Conditional)**\n\nYour low Debt-to-Income ratio and consistent cash inflows put you in a strong position to borrow. However, because your credit score sits in the **Moderate/Fair bracket (695)** and you are self-employed, loan approvals and interest rates will depend on income documentation and credit score enhancements.\n\n---\n\n### 2. Credit & Financial Health Summary\n\n| Metric | Your Profile | SmartBank Guideline / Standard | Status |\n| :--- | :--- | :--- | :--- |\n| **Annual Income** | ₹6,00,000 (₹50,000/mo) | Minimum ₹25,000/mo for Personal Loans |"
+  },
+  {
+    "user_id": "SB10002",
+    "session_id": "004d7f26-2a48-44cc-9349-176c7b50ad18",
+    "timestamp": "2026-11-09T13:09:57+00:00",
+    "user_message": "What are your Fixed Deposit rates?",
+    "assistant_message": "Hello Priya,\n\nThank you for reaching out to SmartBank. As your dedicated Senior BFSI Advisory Specialist, I would be delighted to guide you through our current Fixed Deposit (FD) and term deposit offerings. \n\nBased on our official SmartBank policies, here is the complete breakdown of our **Fixed Deposit Interest Rates** and terms:\n\n### SmartBank Fixed Deposit Interest Rates (p.a.)\n\n| Tenure | Standard Interest Rate (p.a.) | Senior Citizen Rate (Age 60+) (p.a.) |\n| :--- | :--- | :--- |\n| **7 days to 45 days** | 4.50% | 5.00% |\n| **46 days to 179 days** | 5.75% | 6.25% |\n| **180 days to 364 days** | 6.50% | 7.00% |\n| **1 year to 2 years** | 7.25% | 7.75% |\n| **Above 2 years to 5 years** | **7.40%** | **7.90%** |\n| **5 years to 10 years** | 7.10% | 7.60% |\n\n---\n\n### Key Features & Terms\n\n* **Compounding Frequency:** Interest is compounded quarterly. You can choose between **cumulative reinvestment** (earning compound interest paid out at maturity) or **periodic payouts** (monthly or quarterly interest crediting).\n* **Tax-Saver FD:** We offer a specialized 5-year fixed tenure deposit eligible for tax deductions under **Section 80C** of the Income Tax Act up to ₹1,50,000 per financial year. *(Note: Premature withdrawal and loans against Tax-Saver FDs are not permitted).*\n* **Premature Withdrawal:** Permitted for standard FDs (subject to a penalty of 0.50% to 1.00% on the applicable rate for the duration the deposit was held).\n\n### Personalized Advisory Note for You, Priya\nLooking at your current financial profile, you maintain a healthy savings balance of ₹92,750.00 alongside active income inflows. If you have surplus funds that you do not require for immediate liquidity or your 3-6 month emergency reserve, channeling them into an FD—such as the **Above 2 years to 5 years bracket offering 7.40% p.a.**—is an excellent way to optimize your returns compared to standard savings rates.\n\nPlease let me know if you would like to calculate potential maturity values for a specific deposit amount or tenure. I am here to help you manage your wealth securely!\n\n*Disclaimer: AI estimates and guidance are educational and illustrative. FD bookings and interest yields are subject to standard bank verification and terms.*"
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-09T13:21:03+00:00",
+    "user_message": "What does my uploaded loan agreement say about late payment penalty and foreclosure charges?",
+    "assistant_message": "Dear Aarav Sharma,\n\nThank you for reaching out to SmartBank AI. Based on your uploaded **Personal Loan Special Terms Agreement (Agreement No: SMBK-PL-982341)** for your sanctioned amount of ₹6,00,000, here are the exact terms regarding late payment penalties and foreclosure charges:\n\n---\n\n### 📋 Key Loan Terms Summary\n\n| Parameter | Agreement Terms & Details |\n| :--- | :--- |\n| **Late Payment Penalty** | • **Grace Period**: 3 days from the due date.<br>• **Penal Charge**: **2% per month (24% p.a.)** levied on the overdue EMI amount after the 3-day grace period. |\n| **Foreclosure Charges** | • **Prior to 12 Completed EMIs**: A **2% foreclosure fee** applies on the outstanding balance.<br>• **After 12 Completed EMIs**: **Zero (0%) foreclosure charges**. |\n\n---\n\n### 💡 Advisory & Best Practices\n\n1. **Maintaining Your Credit Profile**: \n   With your current **Prime Credit Score of 785**, ensuring your EMIs are paid within the 3-day grace period protects your credit bureau rating from payment default flags and avoids unnecessary penal interest.\n\n2. **Smart Prepayment Strategy**: \n   If you plan to clear your loan early, timing your prepayment **after completing 12 EMI cycles** allows you to fully foreclose the loan with **zero penalty**, saving you the 2% fee as well as future interest charges.\n\n---\n\n*Disclaimer: This summary is based on your uploaded loan agreement terms (SMBK-PL-982341). Prepayment or foreclosure requests can be initiated seamlessly via SmartBank NetBanking or by visiting your home branch with your Official Valid Documents (OVDs).*\n\nIf you need help calculating your EMI or planning a foreclosure strategy, please feel free to ask!"
+  },
+  {
+    "user_id": "SB10003",
+    "session_id": "1341b64f-a602-4ef3-8346-f1e09f0edec9",
+    "timestamp": "2026-11-09T13:32:55+00:00",
+    "user_message": "hi",
+    "assistant_message": "Hello Rahul, \n\nWelcome to SmartBank. I am your Senior BFSI Advisory Specialist, here to help you navigate your everyday banking, credit profile, savings, and financial security. \n\nLooking at your SmartBank profile, you currently maintain a balance of **₹54,800.00** in your Savings Account (XXXX XXXX 1003). \n\nHow can I assist you with your finances today? Here are a few ways we can work together:\n*   **Credit Health & Repair:** Actionable steps to improve your CIBIL score (currently at 590) and reduce credit utilization.\n*   **Savings & Wealth Building:** Maximizing returns with our SmartSaver accounts (yielding 4.0%-6.5%) or disciplined SIP investing.\n*   **Retail Lending:** Exploring eligibility and reducing debt-to-income burdens if you are planning for personal, home, or auto loans.\n*   **Protection & Insurance:** Securing your family’s future with SmartProtect term life and SmartHealth Shield policies.\n\n*Please note: For your security, never share passwords, PINs, OTPs, or CVVs with anyone, including bank representatives.* \n\nHow may I guide you today, Rahul?"
+  },
+  {
+    "user_id": "SB10001",
+    "session_id": "default",
+    "timestamp": "2026-11-09T13:42:49+00:00",
+    "user_message": "What are your savings account interest rates?",
+    "assistant_message": "Hello Aarav,\n\nThank you for reaching out to SmartBank. As your Senior Financial Advisory Specialist, I would be delighted to outline our savings account interest rates and structure for you.\n\n---\n\n### SmartBank Savings Account Interest Rates & Structure\n\nUnder our **SmartSaver Account** policy, we offer a tiered interest rate structure designed to maximize returns on your hard-earned savings:\n\n*   **For balances up to ₹1,00,000:** **4.0% p.a.**\n*   **For balances above ₹1,00,000:** **6.5% p.a.**\n\n**Key Account Features:**\n*   **Interest Calculation:** Calculated daily based on your closing account balance and credited quarterly.\n*   **Minimum Balance:** Zero minimum balance requirement for salaried accounts (such as yours), making it exceptionally convenient.\n*   **Your Current Status:** Looking at your active profile, your available balance stands at **₹148,250.00**. This means the portion of your balance above ₹1,00,000 (i.e., ₹48,250.00) earns the attractive **6.5% p.a.** rate, while the first ₹1,00,000 earns **4.0% p.a.**\n\n---\n\n### Premium Alternative: SmartWealth Privilege Account\nGiven your healthy net savings and disciplined financial profile, you may also qualify for our **SmartWealth Privilege Account**, which requires a ₹1,00,000 minimum balance or a ₹5,00,000 total relationship value. This premium tier offers:\n*   A dedicated Relationship Manager.\n*   Complimentary airport lounge access.\n*   Enhanced daily limits (₹1,00,000 ATM cash withdrawal / ₹3,00,000 POS limit).\n\n---\n\n### 🔒 Important Security Reminder\n*SmartBank representatives will **never** ask you to share your password, PIN, OTP, CVV, or full card number. Please keep your credentials strictly confidential.*\n\nPlease let me know if you would like to explore upgrading your account or if you would like assistance setting up an auto-sweep or Recurring Deposit (RD) to further optimize your savings! \n\n*Disclaimer: AI estimates and guidance are educational and illustrative. Product features and interest rates are subject to SmartBank's official terms and conditions.*"
+  },
+  {
+    "user_id": "SB10003",
+    "session_id": "f308fd5a-e5ec-4172-bd52-532edba9594d",
+    "timestamp": "2026-11-09T13:58:41+00:00",
+    "user_message": "hi",
+    "assistant_message": "Hello **Rahul**, \n\nWelcome to SmartBank AI. I am your Senior BFSI Advisory Specialist, here to help you navigate your banking, lending, and financial wellness needs. \n\nBased on your financial overview, I see that you are currently maintaining a positive net savings flow, though there are important opportunities to optimize your credit health and financial planning. \n\nHow can I assist you today? Here are a few areas we can explore:\n* **Credit Health & Repair:** Actionable steps to improve your CIBIL score from its current 590 (Poor) rating and reduce your 67% credit utilization.\n* **Savings & Wealth Management:** Strategies to grow your ₹54,800.00 balance, build a 3–6 month emergency fund, or set up automated savings.\n* **Retail Lending:** Guidance on unsecured personal loans, home loans, or auto loans (subject to standard bank underwriting and documentation verification).\n* **Insurance & Protection:** Safeguarding your income and loved ones with pure term life insurance or comprehensive health coverage (SmartHealth Shield).\n\n*Security Reminder: For your protection, SmartBank AI will never ask for your passwords, PINs, OTPs, CVVs, or full card numbers. Please keep your credentials strictly confidential.*\n\nHow would you like to proceed today, Rahul?"
   }
 ]
